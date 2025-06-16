@@ -2,8 +2,8 @@ document.addEventListener("DOMContentLoaded", () => {
   // === GALLERY ===
   const galleryContainer = document.getElementById("gallery-container");
   if (galleryContainer) {
-    const imageFiles = ["01.webp","02.webp","03.webp"]; //file name of pic
-    const basePath = "../../assets/img/boxes/restaurants/tarocchi/"; //path pic
+    const imageFiles = ["01.webp","02.png"]; //file name of pic
+    const basePath = "../../assets/img/boxes/at-your-door/babysitter/"; //path pic
     const images = imageFiles.map(f => basePath + f);
 //cambiare alt name linea 14
     galleryContainer.innerHTML = `
@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <button class="gallery-btn prev">&#10094;</button>
         <div class="gallery-track-container">
           <div class="gallery-track">
-            ${images.map(src => `<div class="gallery-slide"><img src="${src}" alt="Brindellone" /></div>`).join('')}
+            ${images.map(src => `<div class="gallery-slide"><img src="${src}" alt="Babysitter" /></div>`).join('')}
           </div>
         </div>
         <button class="gallery-btn next">&#10095;</button>
@@ -53,7 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       <form id="booking-form" class="booking-form" novalidate>
         <label class="bold-text" for="date-picker">Add info and chat!</label>
-        <div></p></div><p class="bold-gray">*mandatory field</p>
+        <div></p></div><p class="bold-gray">*mandatory field</p> 
         <input type="text" id="main-guest" placeholder="*Name and Surname" required>
         <input type="text" id="date-picker" placeholder="Select a date" readonly>
         <select id="guest-picker">
@@ -86,7 +86,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const sendMsg = method => {
     const val = id => document.getElementById(id)?.value.trim() || '';
     const lines = [
-      `Hello! I'd like to book "Tarocchi".`,
+      `Hello! I'd like to book "Babysitting".`,
       ``,
       `📅 Date:  ${val("date-picker")}`,
       `👤 Name:  ${val("main-guest")}`,
@@ -108,36 +108,35 @@ document.addEventListener("DOMContentLoaded", () => {
       window.open(`https://wa.me/393473119031?text=${encodeURIComponent(msg)}`, "_blank");
     } else {
       const mailMsg = encodeURIComponent(msg);
-      window.location.href = `mailto:francesco@wheredolocals.com?subject=PASTA EXPERIENCE&body=${mailMsg}`; //cambiare nome experience
+      window.location.href = `mailto:francesco@wheredolocals.com?subject=&body=${mailMsg}`; //cambiare nome experience
     }
   };
   
 
-// Gestione del bottone WhatsApp (submit del form)
-document.getElementById("booking-form")
-  .addEventListener("submit", e => {
-    e.preventDefault();
-    const form = e.target;
+  // Gestione del bottone WhatsApp (submit del form)
+  document.getElementById("booking-form")
+    .addEventListener("submit", e => {
+      e.preventDefault();
+      const form = e.target;
 
-    if (form.checkValidity()) {
-      sendMsg("whatsapp");
-    } else {
-      form.reportValidity(); // Mostra messaggi di errore dei campi
-    }
-  });
+      if (form.checkValidity()) {
+        sendMsg("whatsapp");
+      } else {
+        form.reportValidity(); // Mostra messaggi di errore dei campi
+      }
+    });
 
-// Gestione del bottone email (click separato)
-document.getElementById("submit-email")
-  .addEventListener("click", () => {
-    const form = document.getElementById("booking-form");
+  // Gestione del bottone email (click separato)
+  document.getElementById("submit-email")
+    .addEventListener("click", () => {
+      const form = document.getElementById("booking-form");
 
-    if (form.checkValidity()) {
-      sendMsg("email");
-    } else {
-      form.reportValidity(); // Mostra messaggi di errore dei campi
-    }
-  });
-
+      if (form.checkValidity()) {
+        sendMsg("email");
+      } else {
+        form.reportValidity(); // Mostra messaggi di errore dei campi
+      }
+    });
   }
 
   // === HEADER LOGO ===
