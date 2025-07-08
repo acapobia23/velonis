@@ -54,9 +54,8 @@ document.addEventListener("DOMContentLoaded", () => {
       <form id="booking-form" class="booking-form" novalidate>
         <label class="bold-text" for="date-picker">Add info and chat!</label>
         <div></p></div><p class="bold-gray">*mandatory field</p>
-        <input type="text" id="date-picker" placeholder="Select a date" readonly>
-
         <input type="text" id="main-guest" placeholder="*Name and Surname" required>
+        <input type="text" id="date-picker" placeholder="Select a date" readonly>
         <select id="guest-picker">
           ${[...Array(6)].map((_,i)=>
             `<option value="${i+1}">${i+1} Adult${i>0?'s':''}</option>`
@@ -74,6 +73,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <button type="submit" class="check-btn">Send and chat via WhatsApp</button>
         <div></p></div>
         <button type="button" id="submit-email" class="check-btn">Send via email</button>
+        <p style="color: #888888;">No auto-replies, no bot</p>
       </form>
     `;
     const dateInput = document.getElementById('date-picker');
@@ -109,7 +109,7 @@ document.addEventListener("DOMContentLoaded", () => {
       window.open(`https://wa.me/393473119031?text=${encodeURIComponent(msg)}`, "_blank");
     } else {
       const mailMsg = encodeURIComponent(msg);
-      window.location.href = `mailto:francesco@wheredolocals.com?subject=POOL AND PINTS&body=${mailMsg}`; //cambiare nome experience
+      window.location.href = `mailto:wheredolocals@gmail.com?subject=&body=${mailMsg}`; //cambiare nome experience
     }
   };
   

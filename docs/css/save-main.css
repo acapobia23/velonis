@@ -1,0 +1,192 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body, h1, h2, h3, h4, h5, h6, p, a, button {
+    font-family: 'Poppins', sans-serif;
+    color: #555454;
+  }
+  
+  .banner {
+    background: url('../assets/img/headers/wdl-onlylogo.jpg') no-repeat center center;
+    background-size: cover;
+    background-position: center bottom;
+    width: 100%;
+    height: 250px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+    border-radius: 0 0 4.2% 4.2%;
+  }
+  
+  .grid-item {
+    height: 100%; /* prende sempre tutta l'altezza disponibile dal .col */
+    min-height: 160px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 8px 5px rgba(0, 0, 0, 0.1);
+    border: 3px solid #3BD2C9;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* centram. verticale */
+    text-align: center;
+    transition: transform 0.15s ease-out, background-color 0.15s ease-out;
+    touch-action: manipulation;
+    will-change: transform;
+  }
+
+  .bott-grid-item {
+    height: 100%; /* prende sempre tutta l'altezza disponibile dal .col */
+    min-height: 50px;
+    background-color: #f9f9f9;
+    border-radius:  80px;
+    padding: 20px;
+    box-shadow: 0 8px 5px rgba(0, 0, 0, 0.1);
+    border: 3px solid #3BD2C9;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* centram. verticale */
+    text-align: center;
+    transition: transform 0.15s ease-out, background-color 0.15s ease-out;
+    touch-action: manipulation;
+    will-change: transform;
+  }
+  
+  
+  /* touch mobile */
+  .grid-item:active {
+    transform: scale(0.97);
+    background-color: #e6f9f8;
+  }
+  
+  .grid-item:hover {
+    transform: scale(1.03);
+  }
+  
+  .grid-item img {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 10px;
+  }
+  
+  .grid-item h2 {
+    font-size: 1.1rem;
+    margin-bottom: 8px;
+  }
+  .flip-card {
+  perspective: 1000px;
+  cursor: pointer;
+  height: 100%;
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+}
+
+.flip-card.flipped .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  text-align: center;
+}
+
+.flip-card-front {
+  background-color: #f9f9f9;
+  z-index: 2;
+  flex-direction: row-reverse; /* metti orizzontale */
+  justify-content: flex-start; /* allinea da sinistra */
+  text-align: left;
+  padding: 0; /* togli padding per usare solo padding nei figli */
+  gap: 20px;
+}
+
+.flip-card-front .img-left {
+  width: 40%;
+  height: 95%;
+  object-fit: cover;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  /* rimuovi margini se ci sono */
+  margin: 0;
+  margin-right: 1%;
+}
+
+.center-img {
+  object-fit: cover;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  /* rimuovi margini se ci sono */
+  margin: 0;
+  margin-right: 1%;
+}
+
+.flip-card-front .text-box {
+  width: 50%;
+  height: 100%;
+  padding: 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/*back*/
+
+.flip-card-back {
+  background-color: #f9f9f9;
+  transform: rotateY(180deg);
+  display: flex;
+  justify-content: flex-start; /* testo a sinistra */
+  text-align: left;
+  padding: 0; /* gestione padding nei figli */
+  gap: 20px;
+}
+
+.flip-card-back .img-left {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
+  border-top-right-radius: 8px;
+  border-bottom-right-radius: 8px;
+  margin: 0;
+  margin-right: 15px; /* margine destro stavolta */
+}
+
+.flip-card-back .text-box {
+  height: 100%;
+  padding: 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.typerest {
+  font-size: 20px;
+  color: #3BD2C9;
+  font-style: italic;
+}

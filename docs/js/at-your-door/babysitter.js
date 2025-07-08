@@ -56,23 +56,13 @@ document.addEventListener("DOMContentLoaded", () => {
         <div></p></div><p class="bold-gray">*mandatory field</p> 
         <input type="text" id="main-guest" placeholder="*Name and Surname" required>
         <input type="text" id="date-picker" placeholder="Select a date" readonly>
-        <select id="guest-picker">
-          ${[...Array(6)].map((_,i)=>
-            `<option value="${i+1}">${i+1} Adult${i>0?'s':''}</option>`
-          ).join('')}
-        </select>
-        <select id="under-18">
-          <option value="0">No Minors</option>
-          ${[...Array(5)].map((_,i)=>
-            `<option value="${i+1}">${i+1} Minor${i>0?'s':''}</option>`
-          ).join('')}
-        </select>
         <input type="email" id="email" placeholder="example@email.com">
         <input type="tel" id="phone" placeholder="+39 123 456 7890">
         <textarea id="optional-request" placeholder="Optional Request"></textarea>
         <button type="submit" class="check-btn">Send and chat via WhatsApp</button>
         <div></p></div>
         <button type="button" id="submit-email" class="check-btn">Send via email</button>
+        <p style="color: #888888;">No auto-replies, no bot</p>
       </form>
     `;
     const dateInput = document.getElementById('date-picker');
@@ -90,8 +80,6 @@ document.addEventListener("DOMContentLoaded", () => {
       ``,
       `📅 Date:  ${val("date-picker")}`,
       `👤 Name:  ${val("main-guest")}`,
-      `🧑‍🤝‍🧑 Adults: ${val("guest-picker")}`,
-      `👶 Minors: ${val("under-18")}`,
       `📧 Email: ${val("email")}`,
       `📞 Phone: ${val("phone")}`,
     ];
@@ -108,7 +96,7 @@ document.addEventListener("DOMContentLoaded", () => {
       window.open(`https://wa.me/393473119031?text=${encodeURIComponent(msg)}`, "_blank");
     } else {
       const mailMsg = encodeURIComponent(msg);
-      window.location.href = `mailto:francesco@wheredolocals.com?subject=&body=${mailMsg}`; //cambiare nome experience
+      window.location.href = `mailto:wheredolocals@gmail.com?subject=&body=${mailMsg}`; //cambiare nome experience
     }
   };
   

@@ -74,6 +74,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <button type="submit" class="check-btn">Send and chat via WhatsApp</button>
         <div></p></div>
         <button type="button" id="submit-email" class="check-btn">Send via email</button>
+        <p style="color: #888888;">No auto-replies, no bot</p>
       </form>
     `;
     const dateInput = document.getElementById('date-picker');
@@ -109,7 +110,7 @@ document.addEventListener("DOMContentLoaded", () => {
       window.open(`https://wa.me/393473119031?text=${encodeURIComponent(msg)}`, "_blank");
     } else {
       const mailMsg = encodeURIComponent(msg);
-      window.location.href = `mailto:francesco@wheredolocals.com?subject=PASTA EXPERIENCE&body=${mailMsg}`; //cambiare nome experience
+      window.location.href = `mailto:wheredolocals@gmail.com?subject=&body=${mailMsg}`; //cambiare nome experience
     }
   };
   
