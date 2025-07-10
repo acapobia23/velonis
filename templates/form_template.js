@@ -50,7 +50,6 @@ document.addEventListener("DOMContentLoaded", () => {
       <div id="message-box" class="hidden">
         <p id="message-text"></p>
       </div>
-
       <form id="booking-form" class="booking-form" novalidate>
         <label class="bold-text" for="date-picker">Add info and chat!</label>
         <div></p></div><p class="bold-gray">*mandatory field</p> 

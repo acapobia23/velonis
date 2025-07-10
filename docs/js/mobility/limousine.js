@@ -2,17 +2,19 @@ document.addEventListener("DOMContentLoaded", () => {
   // === GALLERY ===
   const galleryContainer = document.getElementById("gallery-container");
   if (galleryContainer) {
-    const imageFiles = ["01.png"]; //file name of pic
+    const imageFiles = ["01.png","02.png"]; //file name of pic
     const basePath = "../../assets/img/boxes/mobility/private-van/"; //path pic
     const images = imageFiles.map(f => basePath + f);
 //cambiare alt name linea 14
     galleryContainer.innerHTML = `
       <div class="gallery">
+        <button class="gallery-btn prev">&#10094;</button>
         <div class="gallery-track-container">
           <div class="gallery-track">
-            ${images.map(src => `<div class="gallery-slide"><img src="${src}" alt="Pasta Experience" /></div>`).join('')}
+            ${images.map(src => `<div class="gallery-slide"><img src="${src}" alt="Private Van" /></div>`).join('')}
           </div>
         </div>
+        <button class="gallery-btn next">&#10095;</button>
       </div>
     `;
 
@@ -51,17 +53,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
       <form id="booking-form" class="booking-form" novalidate>
         <label class="bold-text" for="date-picker">Add info and chat!</label>
-        <div></p></div><p class="bold-gray">*mandatory field</p>
+        <div></p></div><p class="bold-gray">*mandatory field</p> 
         <input type="text" id="main-guest" placeholder="*Name and Surname" required>
+        <input type="text" id="date-picker" placeholder="Select a date" readonly>
         <select id="guest-picker">
           ${[...Array(6)].map((_,i)=>
-            `<option value="${i+1}">${i+1} Adult${i>0?'s':''}</option>`
-          ).join('')}
-        </select>
-        <select id="under-18">
-          <option value="0">No Minors</option>
-          ${[...Array(5)].map((_,i)=>
-            `<option value="${i+1}">${i+1} Minor${i>0?'s':''}</option>`
+            `<option value="${i+1}">${i+1} Passengers${i>0?'s':''}</option>`
           ).join('')}
         </select>
         <input type="email" id="email" placeholder="example@email.com">
@@ -84,11 +81,11 @@ document.addEventListener("DOMContentLoaded", () => {
   const sendMsg = method => {
     const val = id => document.getElementById(id)?.value.trim() || '';
     const lines = [
-      `Hello! I'd like to book "Private Transport".`,
+      `Hello! I'd like to book "Private Van".`,
       ``,
+      `📅 Date:  ${val("date-picker")}`,
       `👤 Name:  ${val("main-guest")}`,
       `🧑‍🤝‍🧑 Adults: ${val("guest-picker")}`,
-      `👶 Minors: ${val("under-18")}`,
       `📧 Email: ${val("email")}`,
       `📞 Phone: ${val("phone")}`,
     ];
@@ -110,31 +107,30 @@ document.addEventListener("DOMContentLoaded", () => {
   };
   
 
-// Gestione del bottone WhatsApp (submit del form)
-document.getElementById("booking-form")
-  .addEventListener("submit", e => {
-    e.preventDefault();
-    const form = e.target;
+  // Gestione del bottone WhatsApp (submit del form)
+  document.getElementById("booking-form")
+    .addEventListener("submit", e => {
+      e.preventDefault();
+      const form = e.target;
 
-    if (form.checkValidity()) {
-      sendMsg("whatsapp");
-    } else {
-      form.reportValidity(); // Mostra messaggi di errore dei campi
-    }
-  });
+      if (form.checkValidity()) {
+        sendMsg("whatsapp");
+      } else {
+        form.reportValidity(); // Mostra messaggi di errore dei campi
+      }
+    });
 
-// Gestione del bottone email (click separato)
-document.getElementById("submit-email")
-  .addEventListener("click", () => {
-    const form = document.getElementById("booking-form");
+  // Gestione del bottone email (click separato)
+  document.getElementById("submit-email")
+    .addEventListener("click", () => {
+      const form = document.getElementById("booking-form");
 
-    if (form.checkValidity()) {
-      sendMsg("email");
-    } else {
-      form.reportValidity(); // Mostra messaggi di errore dei campi
-    }
-  });
-
+      if (form.checkValidity()) {
+        sendMsg("email");
+      } else {
+        form.reportValidity(); // Mostra messaggi di errore dei campi
+      }
+    });
   }
 
   // === HEADER LOGO ===
