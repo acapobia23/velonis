@@ -87,7 +87,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const sendMsg = method => {
     const val = id => document.getElementById(id)?.value.trim() || '';
     const lines = [
-      `Hello! I'd like to book "Live the Dolce Vita in Florence - eFiat 500 Tour".`,
+      `Hello! I'd like to book "the Dolce Vita in Florence - eFiat 500 Tour".`,
       ``,
       `📅 Date:  ${val("date-picker")}`,
       `👤 Name:  ${val("main-guest")}`,

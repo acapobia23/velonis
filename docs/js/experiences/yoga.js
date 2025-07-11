@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const galleryContainer = document.getElementById("gallery-container");
   if (galleryContainer) {
     const imageFiles = ["01.jpg","02.jpg","03.jpg","04.jpg"]; //file name of pic
-    const basePath = "../../assets/img/boxes/at-your-door/yoga/"; //path pic
+    const basePath = "../../assets/img/boxes/experience/yoga/"; //path pic
     const images = imageFiles.map(f => basePath + f);
 //cambiare alt name linea 14
     galleryContainer.innerHTML = `
@@ -87,7 +87,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const sendMsg = method => {
     const val = id => document.getElementById(id)?.value.trim() || '';
     const lines = [
-      `Hello! I'd like to book "Yoga".`,
+      `Hello! I'd like to book "Yoga Lesson".`,
       ``,
       `📅 Date:  ${val("date-picker")}`,
       `👤 Name:  ${val("main-guest")}`,
