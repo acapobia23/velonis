@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const images = [
     'assets/img/headers/wdl-onlylogo.jpg',
-    'assets/img/original/ponte-vecchio.jpg',
+    'assets/img/headers/500-florence.webp',
     'assets/img/original/header-experiences.jpg',
   ];
 
