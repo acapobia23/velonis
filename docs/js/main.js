@@ -13,32 +13,6 @@ function handleCardClick(card) {
   }
 }
 
-// banner che scorre
-
-document.addEventListener('DOMContentLoaded', () => {
-  const bannerImg = document.getElementById('banner-img');
-
-  const images = [
-    'assets/img/headers/wdl-onlylogo.jpg',
-    'assets/img/headers/500-florence.webp',
-    'assets/img/original/header-experiences.jpg',
-  ];
-
-  let index = 0;
-
-  setInterval(() => {
-    index = (index + 1) % images.length;
-
-    // Effetto dissolvenza
-    bannerImg.style.opacity = 0;
-
-    setTimeout(() => {
-      bannerImg.style.backgroundImage = `url('${images[index]}')`;
-      bannerImg.style.opacity = 1;
-    }, 500);
-  }, 5000); // ← Mancava questo parametro per l'intervallo di 5 secondi
-});
-
 
 
 
