@@ -2,8 +2,8 @@ document.addEventListener("DOMContentLoaded", () => {
   // === GALLERY ===
   const galleryContainer = document.getElementById("gallery-container");
   if (galleryContainer) {
-    const imageFiles = ["01.webp", "02.webp"]; //file name of pic
-    const basePath = "../../../assets/img/boxes/restaurants/cibreo/ristorante/"; //path pic
+    const imageFiles = ["01.jpg","02.jpg","03.jpg"]; //file name of pic
+    const basePath = "../../assets/img/boxes/wellness/"; //path pic
     const images = imageFiles.map(f => basePath + f);
 //cambiare alt name linea 14
     galleryContainer.innerHTML = `
@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <button class="gallery-btn prev">&#10094;</button>
         <div class="gallery-track-container">
           <div class="gallery-track">
-            ${images.map(src => `<div class="gallery-slide"><img src="${src}" alt="Cibreo" /></div>`).join('')}
+            ${images.map(src => `<div class="gallery-slide"><img src="${src}" alt="Wellness" /></div>`).join('')}
           </div>
         </div>
         <button class="gallery-btn next">&#10095;</button>
@@ -50,16 +50,28 @@ document.addEventListener("DOMContentLoaded", () => {
       <div id="message-box" class="hidden">
         <p id="message-text"></p>
       </div>
-
       <form id="booking-form" class="booking-form" novalidate>
-        <label class="bold-text" for="date-picker">Straight Booking</label>
+        <label class="bold-text" for="date-picker">Add info and chat!</label>
+        <div><p></p></div><p class="bold-gray">*mandatory field</p> 
+        <input type="text" id="main-guest" placeholder="*Name and Surname" required>
+        <input type="text" id="date-picker" placeholder="Select a date" readonly>
+        <select id="guest-picker">
+          ${[...Array(6)].map((_,i)=>
+            `<option value="${i+1}">${i+1} Adult${i>0?'s':''}</option>`
+          ).join('')}
+        </select>
+        <select id="under-18">
+          <option value="0">No Minors</option>
+          ${[...Array(5)].map((_,i)=>
+            `<option value="${i+1}">${i+1} Minor${i>0?'s':''}</option>`
+          ).join('')}
+        </select>
+        <input type="email" id="email" placeholder="example@email.com">
+        <input type="tel" id="phone" placeholder="+39 123 456 7890">
+        <textarea id="optional-request" placeholder="Optional Request"></textarea>
         <div><p></p></div>
-        <a href="https://widget.thefork.com/en-GB/410a205b-f0ee-4860-a4e1-be3378bd437b/homepage/2cce23fb-e4c5-4f30-bc73-7d6f8ab84f85?utm_source=referral&utm_medium=website&utm_campaign=francesco-deza"
-          class="check-btn"
-          role="button"
-          style="display: block; margin: 0 auto; width: 80%; height: auto; text-align: center; text-decoration: none;">
-          Go to Reservation
-        </a>
+        <button type="button" id="submit-email" class="check-btn">Send via email</button>
+        <p style="color: #888888;">No auto-replies, no bot</p>
       </form>
     `;
     const dateInput = document.getElementById('date-picker');
@@ -73,7 +85,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const sendMsg = method => {
     const val = id => document.getElementById(id)?.value.trim() || '';
     const lines = [
-      `Hello! I'd like to book "Cibreo".`,
+      `Hello! I'd like to book "PASTA EXPERIENCE".`,
       ``,
       `📅 Date:  ${val("date-picker")}`,
       `👤 Name:  ${val("main-guest")}`,
@@ -100,10 +112,30 @@ document.addEventListener("DOMContentLoaded", () => {
   };
   
 
-    document.getElementById("booking-form")
-      .addEventListener("submit", e => { e.preventDefault(); sendMsg("whatsapp"); });
-    document.getElementById("submit-email")
-      .addEventListener("click", () => sendMsg("email"));
+  // Gestione del bottone WhatsApp (submit del form)
+  document.getElementById("booking-form")
+    .addEventListener("submit", e => {
+      e.preventDefault();
+      const form = e.target;
+
+      if (form.checkValidity()) {
+        sendMsg("whatsapp");
+      } else {
+        form.reportValidity(); // Mostra messaggi di errore dei campi
+      }
+    });
+
+  // Gestione del bottone email (click separato)
+  document.getElementById("submit-email")
+    .addEventListener("click", () => {
+      const form = document.getElementById("booking-form");
+
+      if (form.checkValidity()) {
+        sendMsg("email");
+      } else {
+        form.reportValidity(); // Mostra messaggi di errore dei campi
+      }
+    });
   }
 
   // === HEADER LOGO ===

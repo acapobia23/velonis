@@ -53,7 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       <form id="booking-form" class="booking-form" novalidate>
         <label class="bold-text" for="date-picker">Straight Booking</label>
-        <div></p></div>
+        <div><p></p></div>
         <a href="https://widget.thefork.com/en-GB/410a205b-f0ee-4860-a4e1-be3378bd437b/homepage/2cce23fb-e4c5-4f30-bc73-7d6f8ab84f85?utm_source=referral&utm_medium=website&utm_campaign=francesco-deza"
           class="check-btn"
           role="button"

@@ -53,7 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       <form id="booking-form" class="booking-form" novalidate>
         <label class="bold-text" for="date-picker">Shipping Request Form</label>
-        <div></p></div>
+        <div><p></p></div>
         <a href="https://forms.gle/f1wZcA9uRobR1oR99"
           class="check-btn"
           role="button"
