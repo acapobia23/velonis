@@ -353,4 +353,65 @@ h1, h2, h3, h4, h5, h6, a, button {
   vertical-align: middle;
 }
 
+/* === License css === */
+
+#attribution-box {
+  margin-top: 1rem;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  max-height: 400px;
+  overflow-y: auto;
+  transition: max-height 0.3s ease;
+}
+
+.license-btn {
+  width: 100%;
+  background-color: white;
+  border: 2px solid #3BD2C9;
+  color: #3BD2C9;
+  font-weight: bold;
+  padding: 14px 20px;
+  font-size: 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  box-sizing: border-box;
+}
+
+/* ✅ Colori FISSI */
+#toggle-attribution {
+  background-color: white;
+  color: #3BD2C9;
+  border: 2px solid #3BD2C9;
+}
+
+/* ✅ Hover con contrasto visibile */
+#toggle-attribution:hover {
+  border: 2px solid #3BD2C9;
+  background-color: white;
+  color: #3BD2C9;
+}
+
+/* ✅ Testo flessibile senza allargare bottone */
+#toggle-text {
+  /* flex-grow: 1; */
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ✅ Icona che ruota */
+.arrow-down {
+  transition: transform 0.3s ease;
+}
+
+.arrow-up {
+  transform: rotate(180deg);
+}
 

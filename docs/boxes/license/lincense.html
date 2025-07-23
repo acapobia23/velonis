@@ -3,11 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>License & credits – Where Do Locals</title> <!-- scrivere nome experience -->
+   <title>License & Credits – Where Do Locals</title> <!-- scrivere nome experience -->
 
   <link rel="stylesheet" href="../../css/form.css">
-  <link rel="stylesheet" href="../../css/main.css">
-
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/pikaday/css/pikaday.css">
@@ -16,7 +14,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 </head>
 
-<body data-form-type="info-apartament"> <!-- mettere tag pagina-->
+<body data-form-type="license-credits"> <!-- mettere tag pagina-->
 
   <header class="menu-header">
     <a href="../../index.html">
@@ -24,27 +22,50 @@
     </a>
   </header>
 
-  <div class="container">
-    <br><br><br>
+    <br><br><br><br>
 
-    <h2 class="section-title">License & credits</h2> <!-- titolo experience -->
-
+    <h1>License & Credits</h1> <!-- titolo experience -->
+    <br><hr><br>
     <section class="description">
-      <p><strong>Icons:</strong></p>
-      <p>Icons from <a href="https://www.flaticon.com" target="_blank" rel="noopener noreferrer">Flaticon</a> – attribution required for each icon.</p>
+      <h3>Privacy & Policy</h3><br>
+      <p>The personal data you enter in the forms on this site are used exclusively to initiate direct communication via WhatsApp or email, without being stored or retained by the site itself.</p>
+      <p>We do not use profiling cookies. Any technical cookies are used exclusively to ensure the proper functioning of the site.</p>
 
-      <p><strong>Images:</strong></p>
-      <p><a href="https://unsplash.com" target="_blank" rel="noopener noreferrer">Unsplash</a> – free license, attribution appreciated but not required.</p>
-      <p>Foto di <a href="https://unsplash.com/it/@gabiontheroad?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Gabriella Clare Marino</a> su <a href="https://unsplash.com/it/foto/berlina-bianca-sulla-strada-durante-il-giorno-qayCVc-P63w?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a></p>  
+      <hr><br>
+      
+      <h3>Images</h3><br>
+      <p><a href="https://unsplash.com" target="_blank" rel="noopener noreferrer">Unsplash</a> – free license, attribution appreciated but not required.</p>  
       <p><a href="https://pixabay.com" target="_blank" rel="noopener noreferrer">Pixabay</a> – CC0 license, free to use, no attribution required.</p>
+      
+      <hr><br>
+      
+      <h3>Icons</h3><br>
+      <p>
+        Icons from <a href="https://www.flaticon.com" target="_blank" rel="noopener noreferrer">Flaticon</a> – attribution required.
+      </p>
 
-<!-- https://unsplash.com/it/foto/la-gente-passeggia-lungo-una-lunga-passerella-ad-arco-ef04054VCkE?utm_content=creditShareLink&utm_medium=referral&utm_source=unsplash -->
+      <!-- Button link flaticon-->
 
-      <!-- FLATICON (attribuzione obbligatoria) -->
-      <strong><p>Icons from <a href="https://www.flaticon.com" target="_blank">Flaticon</a> – attribution required:</p></strong>
-      <ul>
-        <li><a href="https://www.flaticon.com/free-icons/email" title="email icons">Email icons created by Mayor Icons - Flaticon</a></li>
-        <li><a href="https://www.flaticon.com/free-icons/yoga" title="yoga icons">Yoga icons created by Freepik - Flaticon</a></li>
+      <button id="toggle-attribution" class="license-btn">
+        <span id="toggle-text">Show icon credits</span>
+        <img id="arrow-icon" src="../../assets/img/icons/down-arrow.png" alt="Arrow" class="arrow-down" />
+      </button>
+      <div id="attribution-box" style="display: none;"></div>
+      </div>
+      <br><br><br><br>
+      <br>
+      </section>
+      <br><br><br><br>
+      <div class="icon-links">
+        <a href="tel:+393473119031"><img src="../../assets/img/icons/call.png" alt="contact" /></a>
+        <a href="../../index.html"><img src="../../assets/img/icons/back-arrow.png" alt="back" /></a> <!-- aggiungere back page-->
+      </div>
+    
+    </div>
+    
+    <div id="flaticon-links" style="display: none;">
+     <ul>
+        <li><a href="https://www.flaticon.com/free-icons/event-location" title="event location icons">Event location icons created by juicy_fish - Flaticon</a></li>
         <li><a href="https://www.flaticon.com/free-icons/send" title="send icons">Send icons created by DailyPm Studio - Flaticon</a></li>
         <li><a href="https://www.flaticon.com/free-icons/bakery" title="bakery icons">Bakery icons created by Freepik - Flaticon</a></li>
         <li><a href="https://www.flaticon.com/free-icons/beer" title="beer icons">Beer icons created by Freepik - Flaticon</a></li>
@@ -77,15 +98,11 @@
         <li><a href="https://www.flaticon.com/free-icons/van" title="van icons">Van icons created by Freepik - Flaticon</a></li>
         <li><a href="https://www.flaticon.com/free-icons/taxi" title="taxi icons">Taxi icons created by Freepik - Flaticon</a></li>
         <li><a href="https://www.flaticon.com/free-icons/tram" title="tram icons">Tram icons created by Pixel perfect - Flaticon</a></li>
+        <li><a href="https://www.flaticon.com/free-icons/send" title="send icons">Send icons created by DailyPm Studio - Flaticon</a></li>
       </ul>
-      <br>
-    </section>
-
-    <div class="icon-links">
-      <a href="../../index.html"><img src="../../assets/img/icons/back-arrow.png" alt="back" /></a> <!-- aggiungere back page-->
     </div>
-  </div>
-</body>
-</html>
-
-<script src="../../js/palazzo-nave/info.js"></script> <!-- aggiungere js experience-->
+  
+  </body>
+  </html>
+  
+  <script src="../../js/license/license.js"></script> <!-- aggiungere js experience-->
