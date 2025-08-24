@@ -90,3 +90,35 @@ cd generale/;git add .;git commit -m "update";git push;cd ../palazzo-nave/;git a
 | --------------------------------------- | ------------------------------ | ---------------------------------- |
 | Sito senza memorizzazione dati          | No                             | Basta checkbox obbligatoria        |
 | Sito con raccolta dati e memorizzazione | Sì                             | Devi conservare prova del consenso |
+
+
+**form_GA4**
+
+Aggiungi all’inizio di sendMsg la variabile experience:
+
+const experience = document.querySelector(".section-title")?.innerText.trim() || document.title.trim() || "Unknown Experience";
+
+
+Sostituisci la stringa hard-coded nell’array lines:
+
+// Prima:
+`Hello! I'd like to book "Live the Dolce Vita in Florence - eFiat 500 Tour".`,
+// Dopo:
+`Hello! I'd like to book "${experience}".`,
+
+
+Aggiungi la riga GA4 subito dopo aver definito experience e prima dell’invio del messaggio:
+
+gtag("event", "form_contact", {
+  method: method,
+  experience: experience
+});
+
+
+💡 Con queste modifiche, ogni form invierà a GA4:
+
+experience → il nome dell’esperienza preso automaticamente
+
+method → "whatsapp" o "email"
+
+Non serve modificare il resto del JS, né creare parametri manuali per ogni pagina.

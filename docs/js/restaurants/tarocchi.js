@@ -70,6 +70,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <input type="email" id="email" placeholder="example@email.com">
         <input type="tel" id="phone" placeholder="+39 123 456 7890">
         <textarea id="optional-request" placeholder="Optional Request"></textarea>
+
         <div><p></p></div>
         <button type="button" id="submit-email" class="check-btn">Send via email</button>
         <p style="color: #888888;">No auto-replies, no bot</p>
@@ -85,8 +86,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const sendMsg = method => {
     const val = id => document.getElementById(id)?.value.trim() || '';
+    const experience = document.querySelector(".section-title")?.innerText.trim() || document.title.trim() || "Unknown Experience";
+
+    gtag("event", "form_contact", {
+      method: method,
+      experience: experience
+    });
+    
     const lines = [
-      `Hello! I'd like to book "Tarocchi".`,
+      `Hello! I'd like to book ${experience}.`,
       ``,
       `📅 Date:  ${val("date-picker")}`,
       `👤 Name:  ${val("main-guest")}`,
@@ -104,12 +112,15 @@ document.addEventListener("DOMContentLoaded", () => {
   
     const msg = lines.join('\n');
   
-    if (method === "whatsapp") {
-      window.open(`https://wa.me/393473119031?text=${encodeURIComponent(msg)}`, "_blank");
-    } else {
-      const mailMsg = encodeURIComponent(msg);
-      window.location.href = `mailto:wheredolocals@gmail.com?subject=&body=${mailMsg}`; //cambiare nome experience
-    }
+// 🔹 Aspetta mezzo secondo per dare tempo a GA4 di registrare l'evento
+    setTimeout(() => {
+      if (method === "whatsapp") {
+        window.open(`https://wa.me/393473119031?text=${encodeURIComponent(msg)}`, "_blank");
+      } else {
+        const mailMsg = encodeURIComponent(msg);
+        window.location.href = `mailto:wheredolocals@gmail.com?subject=&body=${mailMsg}`;
+      }
+    }, 1000);
   };
   
 

@@ -72,8 +72,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const sendMsg = method => {
     const val = id => document.getElementById(id)?.value.trim() || '';
+    const experience = document.querySelector(".section-title")?.innerText.trim() || document.title.trim() || "Unknown Experience";
+
+    gtag("event", "form_contact", {
+      method: method,
+      experience: experience
+    });
+    
     const lines = [
-      `Hello! I'd like to book "PASTA EXPERIENCE".`,
+      `Hello! I'd like to book ${experience}.`,
       ``,
       `📅 Date:  ${val("date-picker")}`,
       `👤 Name:  ${val("main-guest")}`,
@@ -91,12 +98,15 @@ document.addEventListener("DOMContentLoaded", () => {
   
     const msg = lines.join('\n');
   
-    if (method === "whatsapp") {
-      window.open(`https://wa.me/393473119031?text=${encodeURIComponent(msg)}`, "_blank");
-    } else {
-      const mailMsg = encodeURIComponent(msg);
-      window.location.href = `mailto:wheredolocals@gmail.com?subject=&body=${mailMsg}`; //cambiare nome experience
-    }
+// 🔹 Aspetta mezzo secondo per dare tempo a GA4 di registrare l'evento
+    setTimeout(() => {
+      if (method === "whatsapp") {
+        window.open(`https://wa.me/393473119031?text=${encodeURIComponent(msg)}`, "_blank");
+      } else {
+        const mailMsg = encodeURIComponent(msg);
+        window.location.href = `mailto:wheredolocals@gmail.com?subject=&body=${mailMsg}`;
+      }
+    }, 1000);
   };
   
 
@@ -121,3 +131,76 @@ document.addEventListener("DOMContentLoaded", () => {
     lastY = y;
   });
 });
+
+  // === FORM === //cambiare qui info form
+  const formContainer = document.getElementById("form-container_bt");
+  if (formContainer) {
+    formContainer.innerHTML = `
+      <div id="message-box" class="hidden">
+        <p id="message-text"></p>
+      </div>
+
+      <form id="booking-form" class="booking-form" novalidate>
+        <label class="bold-text" for="date-picker">Shipping Request Form</label>
+        <div><p></p></div>
+        <a href="https://forms.gle/f1wZcA9uRobR1oR99"
+          class="check-btn"
+          role="button"
+          style="display: block; margin: 0 auto; width: 80%; height: auto; text-align: center; text-decoration: none;">
+          Send a Package
+        </a>
+      </form>
+    `;
+    const dateInput = document.getElementById('date-picker');
+    const picker = new Pikaday({
+      field: dateInput,
+      format: 'DD/MM/YYYY',
+      minDate: new Date(),
+      theme: 'dark-theme' // opzionale
+  });
+
+  const sendMsg = method => {
+    const val = id => document.getElementById(id)?.value.trim() || '';
+    const experience = document.querySelector(".section-title")?.innerText.trim() || document.title.trim() || "Unknown Experience";
+
+    gtag("event", "form_contact", {
+      method: method,
+      experience: experience
+    });
+    
+    const lines = [
+      `Hello! I'd like to book ${experience}.`,
+      ``,
+      `📅 Date:  ${val("date-picker")}`,
+      `👤 Name:  ${val("main-guest")}`,
+      `🧑‍🤝‍🧑 Adults: ${val("guest-picker")}`,
+      `👶 Minors: ${val("under-18")}`,
+      `📧 Email: ${val("email")}`,
+      `📞 Phone: ${val("phone")}`,
+    ];
+  
+    if (val("optional-request")) {
+      lines.push(`📝 Notes: ${val("optional-request")}`);
+    }
+  
+    lines.push(``, `Looking forward to your reply!`);
+  
+    const msg = lines.join('\n');
+  
+// 🔹 Aspetta mezzo secondo per dare tempo a GA4 di registrare l'evento
+    setTimeout(() => {
+      if (method === "whatsapp") {
+        window.open(`https://wa.me/393473119031?text=${encodeURIComponent(msg)}`, "_blank");
+      } else {
+        const mailMsg = encodeURIComponent(msg);
+        window.location.href = `mailto:wheredolocals@gmail.com?subject=&body=${mailMsg}`;
+      }
+    }, 1000);
+  };
+  
+
+    document.getElementById("booking-form")
+      .addEventListener("submit", e => { e.preventDefault(); sendMsg("whatsapp"); });
+    document.getElementById("submit-email")
+      .addEventListener("click", () => sendMsg("email"));
+  }
