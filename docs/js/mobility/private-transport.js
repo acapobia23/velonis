@@ -2,8 +2,8 @@ document.addEventListener("DOMContentLoaded", () => {
   // === GALLERY ===
   const galleryContainer = document.getElementById("gallery-container");
   if (galleryContainer) {
-    const imageFiles = ["01.png","02.png"]; //file name of pic
-    const basePath = "../../assets/img/boxes/mobility/private-van/"; //path pic
+    const imageFiles = ["01.webp","02.webp"]; //file name of pic
+    const basePath = "../../assets/img/boxes/mobility/private-transport/"; //path pic
     const images = imageFiles.map(f => basePath + f);
 //cambiare alt name linea 14
     galleryContainer.innerHTML = `

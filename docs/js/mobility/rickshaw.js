@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // === GALLERY ===
   const galleryContainer = document.getElementById("gallery-container");
   if (galleryContainer) {
-    const imageFiles = ["01.png","02.png", "03.png"]; //file name of pic
+    const imageFiles = ["01.jpeg","02.jpeg", "03.jpeg"]; //file name of pic
     const basePath = "../../assets/img/boxes/mobility/rickshaw/"; //path pic
     const images = imageFiles.map(f => basePath + f);
 //cambiare alt name linea 14

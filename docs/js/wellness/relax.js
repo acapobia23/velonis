@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const galleryContainer = document.getElementById("gallery-container");
   if (galleryContainer) {
     const imageFiles = ["01.jpg","02.jpg","03.jpg", "04.jpg","05.jpg","06.jpg"]; //file name of pic
-    const basePath = "../../assets/img/boxes/wellness/"; //path pic
+    const basePath = "../../assets/img/boxes/wellness/relax/"; //path pic
     const images = imageFiles.map(f => basePath + f);
 //cambiare alt name linea 14
     galleryContainer.innerHTML = `
