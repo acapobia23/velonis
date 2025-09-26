@@ -246,5 +246,144 @@
   color: #6c757d;
 }
 
+/* === License css === */
+
+#attribution-box {
+  margin-top: 1rem;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  max-height: 400px;
+  overflow-y: auto;
+  transition: max-height 0.3s ease;
+}
+
+.license-btn {
+  width: 100%;
+  background-color: white;
+  border: 2px solid #3BD2C9;
+  color: #3BD2C9;
+  font-weight: bold;
+  padding: 14px 20px;
+  font-size: 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  box-sizing: border-box;
+}
+
+/* ✅ Colori FISSI */
+#toggle-attribution {
+  background-color: white;
+  color: #3BD2C9;
+  border: 2px solid #3BD2C9;
+}
+
+/* ✅ Hover con contrasto visibile */
+#toggle-attribution:hover {
+  border: 2px solid #3BD2C9;
+  background-color: white;
+  color: #3BD2C9;
+}
+
+/* ✅ Testo flessibile senza allargare bottone */
+#toggle-text {
+  /* flex-grow: 1; */
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ✅ Icona che ruota */
+.arrow-down {
+  transition: transform 0.3s ease;
+}
+
+.arrow-up {
+  transform: rotate(180deg);
+}
+
+.inline-icon {
+  height: 1em;
+  vertical-align: -0.15em;
+}
+
+/* Box nascosto/stilizzato */
+/* Box nascosto/stilizzato */
+.info-box {
+  background-color: #f2f2f2; /* grigio chiaro */
+  padding: 15px 20px;
+  border-radius: 20px; /* come i bottoni */
+  margin-top: 10px;
+  font-family: Arial, sans-serif;
+  border: 2px solid #3BD2C9; /* aggiunge il bordo come i bottoni */
+  box-sizing: border-box;
+}
+
+.info-box ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.info-box li {
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+}
+
+.info-box .icon {
+  margin-right: 8px;
+}
+
+/* Nasconde il box all’avvio */
+.hidden {
+  display: none;
+}
+
+/* Bottone dettagli simile al tuo license-btn */
+.toggle-btn {
+  width: 100%;
+  background-color: white;
+  border: 2px solid #3BD2C9;
+  color: #3BD2C9;
+  font-weight: bold;
+  padding: 14px 20px;
+  font-size: 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  box-sizing: border-box;
+}
+
+/* Hover bottone */
+.toggle-btn:hover {
+  background-color: white;
+  color: #3BD2C9;
+  border: 2px solid #3BD2C9;
+}
+
+/* Icona che ruota */
+.arrow-down {
+  transition: transform 0.3s ease;
+}
+
+.arrow-up {
+  transform: rotate(180deg);
+}
+
+/* Icona inline all’interno del testo */
+.inline-icon {
+  height: 1em;
+  vertical-align: -0.15em;
+}
+
 
   

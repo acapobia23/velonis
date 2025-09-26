@@ -492,5 +492,54 @@ h1, h2, h3, h4, h5, h6, a, button {
   vertical-align: -0.15em;
 }
 
+#menu-toggle-btn {
+  background-color: white;
+  color: #3BD2C9;
+  border: 2px solid #3BD2C9;
+}
 
+#menu-toggle-btn:hover {
+  border: 2px solid #3BD2C9;
+  background-color: white;
+  color: #3BD2C9;
+}
 
+.map-wine {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid #3BD2C9;
+  border-radius: 12px;
+  padding: 15px;
+  margin: 20px auto;
+  max-width: 120px;
+  background-color: white;
+  transition: all 0.3s ease;
+}
+
+.map-wine:hover {
+  background-color: #f0f9f9;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(59, 210, 201, 0.2);
+}
+
+.map-wine a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+}
+
+.map-wine img {
+  width: 65px;
+  height: auto;
+}
+
+.map-wine span {
+  display: block;
+  margin-top: 8px;
+  font-size: 16px;
+  color: #3BD2C9;
+  font-weight: bold;
+  text-align: center;
+}
