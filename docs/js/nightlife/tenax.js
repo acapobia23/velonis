@@ -54,7 +54,8 @@ document.addEventListener("DOMContentLoaded", () => {
       <form id="booking-form" class="booking-form" novalidate>
         <label class="bold-text" for="date-picker">Add info and chat!</label>
         <div><p></p></div><p class="bold-gray">*mandatory field</p>
-        <input type="text" id="main-guest" placeholder="*Name and Surname" required>
+      <input type="text" id="main-guest" placeholder="*Name and Surname" required>
+      <input type="text" id="host" placeholder="*Host" required>
         <select id="guest-picker">
           ${[...Array(6)].map((_,i)=>
             `<option value="${i+1}">${i+1} Adult${i>0?'s':''}</option>`

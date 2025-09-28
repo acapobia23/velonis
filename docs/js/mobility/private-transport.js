@@ -54,7 +54,8 @@ document.addEventListener("DOMContentLoaded", () => {
       <form id="booking-form" class="booking-form" novalidate>
         <label class="bold-text" for="date-picker">Add info and chat!</label>
         <div><p></p></div><p class="bold-gray">*mandatory field</p> 
-        <input type="text" id="main-guest" placeholder="*Name and Surname" required>
+      <input type="text" id="main-guest" placeholder="*Name and Surname" required>
+      <input type="text" id="host" placeholder="*Host" required>
         <input type="text" id="date-picker" placeholder="Select a date" readonly>
         <select id="guest-picker">
           ${[...Array(9)].map((_,i)=>
@@ -91,7 +92,8 @@ document.addEventListener("DOMContentLoaded", () => {
       `Hello! I'd like to book ${experience}.`,
       ``,
       `📅 Date:  ${val("date-picker")}`,
-      `👤 Name:  ${val("main-guest")}`,
+    `👤 Name:  ${val("main-guest")}`,
+    `🏠 Host:  ${val("host")}`,
       `🧑‍🤝‍🧑 Adults: ${val("guest-picker")}`,
       `📧 Email: ${val("email")}`,
       `📞 Phone: ${val("phone")}`,
