@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // === GALLERY ===
   const galleryContainer = document.getElementById("gallery-container");
   if (galleryContainer) {
-    const imageFiles = ["01.jpg","02.jpg","03.jpg", "04.jpg","05.jpg","06.webp"]; //file name of pic
+    const imageFiles = ["01.jpg","02.jpg","03.jpg","05.jpg","06.webp"]; //file name of pic
     const basePath = "../../assets/img/boxes/wine/wine-tasting/"; //path pic
     const images = imageFiles.map(f => basePath + f);
 //cambiare alt name linea 14
@@ -55,7 +55,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <label class="bold-text" for="date-picker">Add info and chat!</label>
         <div><p></p></div><p class="bold-gray">*mandatory field</p>  
       <input type="text" id="main-guest" placeholder="*Name and Surname" required>
-      <input type="text" id="host" placeholder="*Who did you book your stay with?" required>
+
         <select id="guest-picker">
           ${[...Array(6)].map((_,i)=>
             `<option value="${i+1}">${i+1} Adult${i>0?'s':''}</option>`
@@ -93,11 +93,11 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     
     const lines = [
-      `Hello! I'd like to book ${experience}.`,
+      `Hello! I'm staying at Velona's Jungle and I'd like to book this ${experience}.`,
       ``,
       `📅 Date:  ${val("date-picker")}`,
     `👤 Name:  ${val("main-guest")}`,
-    `🏠 Host:  ${val("host")}`,
+
       `🧑‍🤝‍🧑 Adults: ${val("guest-picker")}`,
       `👶 Minors: ${val("under-18")}`,
       `📧 Email: ${val("email")}`,

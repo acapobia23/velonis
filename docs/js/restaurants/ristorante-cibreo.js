@@ -80,11 +80,11 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     
     const lines = [
-      `Hello! I'd like to book ${experience}.`,
+      `Hello! I'm staying at Velona's Jungle and I'd like to book this ${experience}.`,
       ``,
       `📅 Date:  ${val("date-picker")}`,
     `👤 Name:  ${val("main-guest")}`,
-    `🏠 Host:  ${val("host")}`,
+
       `🧑‍🤝‍🧑 Adults: ${val("guest-picker")}`,
       `👶 Minors: ${val("under-18")}`,
       `📧 Email: ${val("email")}`,

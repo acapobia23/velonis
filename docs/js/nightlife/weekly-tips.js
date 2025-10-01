@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <label class="bold-text" for="date-picker">Add info and chat!</label>
         <div><p></p></div><p class="bold-gray">*mandatory field</p> 
       <input type="text" id="main-guest" placeholder="*Name and Surname" required>
-      <input type="text" id="host" placeholder="*Who did you book your stay with?" required>
+
         <input type="email" id="email" placeholder="example@email.com">
         <input type="tel" id="phone" placeholder="+39 123 456 7890">
         <textarea id="optional-request" placeholder="Optional Request"></textarea>
@@ -82,10 +82,10 @@ document.addEventListener("DOMContentLoaded", () => {
     });
     
     const lines = [
-      `Hello! I'd like to book ${experience}.`,
+      `Hello! I'm staying at Velona's Jungle and I'd like to book this ${experience}.`,
       ``,
     `👤 Name:  ${val("main-guest")}`,
-    `🏠 Host:  ${val("host")}`,
+
       `📧 Email: ${val("email")}`,
       `📞 Phone: ${val("phone")}`,
     ];
