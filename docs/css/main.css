@@ -10,15 +10,35 @@
   }
   
   .banner {
-    background: url('../assets/img/headers/wdl-onlylogo.jpg') no-repeat center center;
+    background: url('../assets/img/headers/header-1920x1080.jpeg') no-repeat center center;
     background-size: cover;
-    background-position: center bottom;
+    background-position: center center;
     width: 100%;
     height: 250px;
     display: flex;
     align-items: flex-end;
     justify-content: flex-start;
-    border-radius: 0 0 4.2% 4.2%;
+    border-radius: 0 0 24px 24px;
+    transform: translateZ(0); /* Forza l'accelerazione hardware */
+    position: relative;      /* Per posizionamento del logo */
+  }
+    
+  .logo-animation {                       /* Logo animato sopra il banner */
+    position: absolute;
+    top: 20%; 
+    left: 50%;
+    transform: translateX(-50%) scale(1.15);
+    opacity: 0;                           /* Inizialmente trasparente */
+    width: 295px;                         /* Dimensione finale  */
+    height: auto;
+    z-index: 10;
+    transition: all 0.7s ease-out;        /* durata */
+    will-change: transform, opacity;
+  }
+
+  .logo-animation.show {                  /* Stato finale del logo  */
+    transform: translateX(-50%) scale(1); /* Dimensione normale */
+    opacity: 1;                           /* Completamente visibile */
   }
   
   .grid-item {
@@ -393,5 +413,61 @@
 /* Classe per adattare l'immagine ai bordi ovali del contenitore */
 .oval-borders .img-left {
     border-radius: 35px !important; /* leggermente meno del contenitore per un effetto pulito */
+}
+
+/* === Search bar pill style === */
+.search-bar-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin: 110px 0 16px 0;
+  position: relative;
+  z-index: 20;
+}
+.search-bar {
+  width: 90%;
+  max-width: 480px;
+  padding: 4px 16px;
+  border-radius: 40px;
+  border: 2px solid #3BD2C9;
+  background: #ffffffcc;
+  font-size: 1.1rem;
+  outline: none;
+  box-shadow: 0 2px 8px rgba(59,210,201,0.07);
+  transition: border-color 0.2s;
+}
+.search-bar:focus {
+  border-color: #1bb3a8;
+}
+.search-suggestions {
+  position: absolute;
+  top: 110%;
+  max-width: 480px;
+  background: #fff;
+  border-radius: 24px;
+  box-shadow: 0 4px 16px rgba(59,210,201,0.13);
+  border: 1.5px solid #3BD2C9;
+  padding: 8px 0;
+  z-index: 100;
+  font-size: 1rem;
+}
+.suggestion-item {
+  padding: 10px 24px;
+  cursor: pointer;
+  border-radius: 24px;
+  transition: background 0.15s;
+}
+.suggestion-item:hover {
+  background: #e6f9f8;
+}
+.suggestion-keywords {
+  color: #888;
+  font-size: 0.92em;
+}
+
+/* Quando aperto */
+.expandable-form.open #optional-fields {
+  max-height: 600px;              /* regola in base alla quantità di campi */
+  padding: 20px;                  /* padding completo solo quando aperto */
 }
   

@@ -543,3 +543,82 @@ h1, h2, h3, h4, h5, h6, a, button {
   font-weight: bold;
   text-align: center;
 }
+
+/*FORM BTN*/
+
+/* Contenitore bottone + campi opzionali */
+.expandable-form {
+  border: 1px solid #3BD2C9;
+  border-radius: 20px;
+  background-color: white;
+  overflow: hidden;               /* ← evita la parte bianca che si allunga */
+  transition: all 0.3s ease;
+}
+
+/* Bottone form con stile input field + layout button */
+.btn-form {
+  width: 100%;
+  padding: 12px 20px;
+  border: none;                   /* ← toglie il doppio bordo */
+  background-color: #f0f0f0;
+  color: #3BD2C9;
+  font-weight: bold;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  box-sizing: border-box;
+}
+
+.btn-form:hover {
+  background-color: #f0f9f9;
+}
+
+/* Icona freccia che ruota */
+.btn-form img {
+  height: 1em;
+  transition: transform 0.3s ease;
+}
+
+.btn-form .arrow-up {
+  transform: rotate(180deg);
+}
+
+/* Campi opzionali (inizialmente chiusi) */
+#optional-fields {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, padding 0.4s ease;
+  background-color: #f0f0f0;
+  padding: 0 20px;                /* padding orizzontale fisso */
+}
+
+/* Quando aperto */
+.expandable-form.open #optional-fields {
+  max-height: 600px;              /* regola in base alla quantità di campi */
+  padding: 20px;                  /* padding completo solo quando aperto */
+}
+
+/* Campi coerenti con booking-form */
+#optional-fields input,
+#optional-fields select,
+#optional-fields textarea {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 12px;
+  border: 1px solid #3BD2C9;
+  border-radius: 20px;
+  font-size: 14px;
+  background-color: white;
+  color: black;
+  box-sizing: border-box;
+}
+
+#optional-fields textarea {
+  height: 4em;
+  resize: vertical;
+  font-family: inherit;
+  line-height: 1.4em;
+}

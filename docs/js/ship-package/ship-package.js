@@ -53,7 +53,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       <form id="booking-form" class="booking-form" novalidate>
         <label class="bold-text" for="date-picker">Shipping Request Form</label>
-        <div><p></p></div>
+ 
         <a href="https://forms.gle/f1wZcA9uRobR1oR99"
           class="check-btn"
           role="button"
@@ -62,13 +62,25 @@ document.addEventListener("DOMContentLoaded", () => {
         </a>
       </form>
     `;
-    const dateInput = document.getElementById('date-picker');
+document.querySelector('.btn-form').addEventListener('click', () => {
+  const container = document.querySelector('.expandable-form');
+  const arrow = document.getElementById('form-arrow');
+
+  container.classList.toggle('open');
+  arrow.classList.toggle('arrow-up');
+});
+
+
+  // Inizializza il date picker (SPOSTATO DOPO IL TOGGLE)
+  const dateInput = document.getElementById('date-picker');
+  if (dateInput) {
     const picker = new Pikaday({
       field: dateInput,
       format: 'DD/MM/YYYY',
       minDate: new Date(),
-      theme: 'dark-theme' // opzionale
-  });
+      theme: 'dark-theme'
+    });
+  }
 
   const sendMsg = method => {
     const val = id => document.getElementById(id)?.value.trim() || '';
@@ -143,7 +155,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       <form id="booking-form" class="booking-form" novalidate>
         <label class="bold-text" for="date-picker">Shipping Request Form</label>
-        <div><p></p></div>
+ 
         <a href="https://forms.gle/f1wZcA9uRobR1oR99"
           class="check-btn"
           role="button"
@@ -152,13 +164,25 @@ document.addEventListener("DOMContentLoaded", () => {
         </a>
       </form>
     `;
-    const dateInput = document.getElementById('date-picker');
+document.querySelector('.btn-form').addEventListener('click', () => {
+  const container = document.querySelector('.expandable-form');
+  const arrow = document.getElementById('form-arrow');
+
+  container.classList.toggle('open');
+  arrow.classList.toggle('arrow-up');
+});
+
+
+  // Inizializza il date picker (SPOSTATO DOPO IL TOGGLE)
+  const dateInput = document.getElementById('date-picker');
+  if (dateInput) {
     const picker = new Pikaday({
       field: dateInput,
       format: 'DD/MM/YYYY',
       minDate: new Date(),
-      theme: 'dark-theme' // opzionale
-  });
+      theme: 'dark-theme'
+    });
+  }
 
   const sendMsg = method => {
     const val = id => document.getElementById(id)?.value.trim() || '';

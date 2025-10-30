@@ -53,8 +53,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
       <form id="booking-form" class="booking-form" novalidate>
         <label class="bold-text" for="date-picker">Add info and chat!</label>
-        <div><p></p></div><p class="bold-gray">*mandatory field</p> 
-      <input type="text" id="main-guest" placeholder="*Name and Surname" required>
+ <p class="bold-gray">*mandatory field</p> 
+      <input type="text" id="main-guest" placeholder="*Name and Surname" required></input>
+        
+      <!-- Sezione campi facoltativi integrata nel bottone -->
+      <div class="expandable-form">
+        <button type="button" class="btn-form" id="toggle-form">
+          <span id="form-toggle-text">optional fields</span>
+          <img id="form-arrow" src="../../assets/img/icons/down-arrow.png" alt="Arrow" class="arrow-down" />
+        </button>
+
+        <div id="optional-fields" class="optional-fields">
 
         <input type="text" id="date-picker" placeholder="Select a date" readonly>
         <select id="guest-picker">
@@ -71,18 +80,35 @@ document.addEventListener("DOMContentLoaded", () => {
         <input type="email" id="email" placeholder="example@email.com">
         <input type="tel" id="phone" placeholder="+39 123 456 7890">
         <textarea id="optional-request" placeholder="Optional Request"></textarea>
-        <div><p></p></div>
-        <button type="button" id="submit-email" class="check-btn">Send via email</button>
+ 
+      </div>
+    </div>
+    <br>
+  
+  <!-- Bottoni di invio -->
+    <button type="button" id="submit-email" class="check-btn">Send via email</button>
         <p style="color: #888888;">No auto-replies, no bot</p>
       </form>
     `;
-    const dateInput = document.getElementById('date-picker');
+document.querySelector('.btn-form').addEventListener('click', () => {
+  const container = document.querySelector('.expandable-form');
+  const arrow = document.getElementById('form-arrow');
+
+  container.classList.toggle('open');
+  arrow.classList.toggle('arrow-up');
+});
+
+
+  // Inizializza il date picker (SPOSTATO DOPO IL TOGGLE)
+  const dateInput = document.getElementById('date-picker');
+  if (dateInput) {
     const picker = new Pikaday({
       field: dateInput,
       format: 'DD/MM/YYYY',
       minDate: new Date(),
-      theme: 'dark-theme' // opzionale
-  });
+      theme: 'dark-theme'
+    });
+  }
 
   const sendMsg = method => {
     const val = id => document.getElementById(id)?.value.trim() || '';
