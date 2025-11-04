@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
         <button class="gallery-btn prev">&#10094;</button>
         <div class="gallery-track-container">
           <div class="gallery-track">
-            ${images.map(src => `<div class="gallery-slide"><img src="${src}" alt="bioritmo" /></div>`).join('')}
+            ${images.map(src => `<div class="gallery-slide"><img src="${src}" alt="Velona's Jungle" /></div>`).join('')}
           </div>
         </div>
         <button class="gallery-btn next">&#10095;</button>
