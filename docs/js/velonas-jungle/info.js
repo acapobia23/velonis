@@ -146,11 +146,17 @@ function setupFilters() {
   const buttons = document.querySelectorAll(".map-controls .bott-grid-item");
 
   buttons.forEach((btn) => {
-    // 🔹 su mobile, rimuove il focus prima del click
-    btn.addEventListener("touchstart", () => btn.blur(), { passive: true });
+    let isTouch = false; // rileva se l’input è touch
 
+    // 🔹 Su dispositivi touch, impostiamo il flag
+    btn.addEventListener("touchstart", () => {
+      isTouch = true;
+    }, { passive: true });
+
+    // 🔹 Un solo listener, ma con logica separata
     btn.addEventListener("click", (e) => {
       e.preventDefault();
+
       const button = e.currentTarget;
       const layerName = button.dataset.layer;
       const layer = layers[layerName];
@@ -166,18 +172,16 @@ function setupFilters() {
         button.classList.add("active");
       }
 
-      // 🔧 forza rimozione di focus e pseudo-stati anche su mobile
-      button.blur();
-      button.classList.remove("focus");
-      button.classList.remove(":focus");
-
-      // (opzionale, sicurezza extra per iOS)
-      setTimeout(() => button.blur(), 100);
+      // 🔧 Rimuove focus solo se è un dispositivo touch reale
+      if (isTouch) {
+        setTimeout(() => {
+          button.blur();
+          button.classList.remove("focus");
+        }, 80);
+      }
     });
   });
 }
-
-
 
 /* === SHOW ROUTE === */
 function showRoute(latlng) {
