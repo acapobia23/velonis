@@ -62,65 +62,149 @@
       <br /><br /><br />
       <h2 class="section-title">Velona's Jungle Tips</h2>
     <div id="gallery-container"></div>
-      <!-- CONTROLLI MAPPA -->
-      <div class="map-controls">
-        <div class="bott-grid-item text-center py-2" data-layer="breakfast">
-          <h2>
-            <img
-              src="../../assets/img/icons/breakfast.png"
-              height="40px"
-              alt="Breakfast"
-            />
-            Breakfast
-          </h2>
-        </div>
-
-        <div class="bott-grid-item text-center py-2" data-layer="boutique">
-          <h2>
-            <img
-              src="../../assets/img/icons/boutique.png"
-              height="40px"
-              alt="Boutique"
-            />
-            Boutique
-          </h2>
-        </div>
-
-        <div class="bott-grid-item text-center py-2" data-layer="restaurant-bar">
-          <h2>
-            <img
-              src="../../assets/img/icons/restaurant.png"
-              height="40px"
-              alt="Restaurant"
-            />
-            Restaurants
-          </h2>
-        </div>
-
-        <div class="bott-grid-item text-center py-2" data-layer="veggie">
-          <h2>
-            <img
-              src="../../assets/img/icons/veggie.png"
-              height="40px"
-              alt="Veggie"
-            />
-            Veggie
-          </h2>
-        </div>
-      </div>
-
-      <!-- MAPPA -->
-      <div id="map"></div>
 
       <!-- DESCRIZIONE -->
       <section class="description">
-        <h3>Our Walking Tips</h3>
         <p>
-          Explore Florence like a local. From cozy cafés to hidden boutiques,
-          discover every corner starting right from Velona’s Jungle.
+          We're happy to have you here!
+          Enjoy Florence like a local with our favorite places to eat, drink, and explore — and don't miss our lovely walks starting from Piazza Goldoni, perfect to discover the city's hidden gems.
         </p>
-      </section>
+        <br><hr><br>
+<!-- WALKING TIPS -->
+<button class="toggle-btn">
+  <span id="toggle-text1">Our Walking Tips</span>
+  <img src="../../assets/img/icons/down-arrow.png" alt="Arrow" class="arrow-down" />
+</button>
 
+<div id="content1" class="toggle-content" style="display: none;">
+  <p>
+    We love starting our walks along the river, on <strong>Lungarno Vespucci</strong>.<br><br>
+    From there, we reach <strong>Piazza Goldoni</strong>, where we usually decide which way to go…<br><br>
+    Here are five of our favorite walks (all starting from Piazza Goldoni):
+  </p>
+
+  <br><br>
+
+  <ol>
+    <li>
+      Follow the river to reach <strong>Ponte Vecchio</strong>, the <strong>Uffizi Gallery</strong>, and <strong>Piazza della Signoria</strong>.
+    </li>
+    <br>
+    <li>
+      Head toward the <strong>Duomo (Cathedral of Santa Maria del Fiore)</strong> through <strong>Via della Vigna Nuova</strong>, crossing <strong>Via Tornabuoni</strong> and <strong>Piazza Strozzi</strong>.
+    </li>
+    <br>
+    <li>
+      Cross <strong>Ponte alla Carraia</strong> to explore the <strong>Oltrarno</strong> area, passing through <strong>Via di Santo Spirito</strong>, <strong>Piazza Santo Spirito</strong>, and <strong>Piazza Pitti</strong>.
+    </li>
+    <br>
+    <li>
+      Enjoy the beauty of <strong>Piazza Santa Maria Novella</strong>, walking along <strong>Via dei Fossi</strong> (the street of antique dealers) and visiting the beautiful <strong>Santa Maria Novella Pharmacy - Officina del Profumo</strong>.
+    </li>
+    <br>
+    <li>
+      For one of the best views over Florence, cross <strong>Ponte Vecchio</strong>, walk up <strong>Costa San Giorgio</strong>, and enter the stunning <strong>Villa Bardini Gardens</strong>.
+    </li>
+  </ol>
+</div>
+
+<br><hr><br>
+
+<!-- FAVORITE SPOTS -->
+<button class="toggle-btn">
+  <span id="toggle-text2">Discover Our Favorite Spots</span>
+  <img src="../../assets/img/icons/down-arrow.png" alt="Arrow" class="arrow-down" />
+</button>
+
+<div id="content2" class="toggle-content" style="display: none;">
+  <p>
+    Explore Florence through our interactive map below.<br><br>
+    Click on the icons to find our favorite cafés, boutiques, restaurants, and veggie-friendly places —  
+    all carefully selected and just a short walk from Velona's Jungle.
+  </p>
+
+  <br>
+
+  <!-- CONTROLLI MAPPA -->
+  <div class="map-controls">
+    <div class="bott-grid-item text-center py-2" data-layer="breakfast">
+      <h2>
+        <img
+          src="../../assets/img/icons/breakfast.png"
+          height="40px"
+          alt="Breakfast"
+        />
+        Breakfast
+      </h2>
+    </div>
+
+    <div class="bott-grid-item text-center py-2" data-layer="boutique">
+      <h2>
+        <img
+          src="../../assets/img/icons/boutique.png"
+          height="40px"
+          alt="Boutique"
+        />
+        Boutique
+      </h2>
+    </div>
+
+    <div class="bott-grid-item text-center py-2" data-layer="restaurant-bar">
+      <h2>
+        <img
+          src="../../assets/img/icons/restaurant.png"
+          height="40px"
+          alt="Restaurant"
+        />
+        Restaurants
+      </h2>
+    </div>
+
+    <div class="bott-grid-item text-center py-2" data-layer="veggie">
+      <h2>
+        <img
+          src="../../assets/img/icons/veggie.png"
+          height="40px"
+          alt="Veggie"
+        />
+        Veggie
+      </h2>
+    </div>
+  </div>
+
+  <!-- MAPPA -->
+  <div id="map"></div>
+</div>
+
+      <br><hr><br>
+
+      <div class="hotel-info" style="text-align: center; line-height: 1.6;">
+          <h3>Hotel Info</h3>
+          <p>
+            <strong>Velona's Jungle Luxury Suites</strong><br>
+            <a 
+              href="https://www.google.com/maps/search/?api=1&query=Via+Montebello+86,+50123+Firenze,+Italy" 
+              target="_blank" 
+              style="color: inherit; text-decoration: underline;">
+              Via Montebello n.86<br>
+              50123, Florence
+            </a><br>
+            Tel. <a href="tel:+390552741536" style="color: inherit; text-decoration: underline;">+39 055 2741536</a><br><br>
+
+            For any need, feel free to call us at<br>
+            <a href="tel:+390552741536" style="color: inherit; text-decoration: underline;"><strong>+39 055 2741536</strong></a><br>
+            the line is forwarded to our mobile phones, so we're always available!<br><br>
+
+            <em>Velona's Jungle is a NON-SMOKING hotel.</em><br><br>
+
+            All bathroom products are by <strong>Laboratori HUR - Made in Florence Natural Beauty</strong>;<br>
+            you can purchase the shampoo, conditioner, and body lotion.<br><br>
+
+            All minibar drinks are <strong>Made in Tuscany</strong>, except for the Prosecco.
+          </p>
+        </div>
+      </section>
+      <br><br><br><br><br><br>
       <!-- BACK BUTTON -->
       <div class="icon-links">
         <a href="../../index.html">

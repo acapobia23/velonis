@@ -2,41 +2,53 @@ document.addEventListener("DOMContentLoaded", () => {
   // === GALLERY ===
   const galleryContainer = document.getElementById("gallery-container");
   if (galleryContainer) {
-    const imageFiles = ["01.jpg","02.webp"]; //file name of pic
-    const basePath = "../../assets/img/boxes/velonas-jungle/"; //path pic
-    const images = imageFiles.map(f => basePath + f);
-//cambiare alt name linea 14
+    const imageFiles = ["01.jpg", "02.webp"]; // file name of pic
+    const basePath = "../../assets/img/boxes/velonas-jungle/"; // path pic
+    const images = imageFiles.map((f) => basePath + f);
+
+    // cambiare alt name linea 14
     galleryContainer.innerHTML = `
       <div class="gallery">
         <button class="gallery-btn prev">&#10094;</button>
         <div class="gallery-track-container">
           <div class="gallery-track">
-            ${images.map(src => `<div class="gallery-slide"><img src="${src}" alt="Velona's Jungle" /></div>`).join('')}
+            ${images
+              .map(
+                (src) =>
+                  `<div class="gallery-slide"><img src="${src}" alt="Velona's Jungle" /></div>`
+              )
+              .join("")}
           </div>
         </div>
         <button class="gallery-btn next">&#10095;</button>
       </div>
     `;
 
-    const track = galleryContainer.querySelector('.gallery-track');
-    const slides = galleryContainer.querySelectorAll('.gallery-slide');
-    const prevBtn = galleryContainer.querySelector('.gallery-btn.prev');
-    const nextBtn = galleryContainer.querySelector('.gallery-btn.next');
+    const track = galleryContainer.querySelector(".gallery-track");
+    const slides = galleryContainer.querySelectorAll(".gallery-slide");
+    const prevBtn = galleryContainer.querySelector(".gallery-btn.prev");
+    const nextBtn = galleryContainer.querySelector(".gallery-btn.next");
     let idx = 0;
 
     const updateGallery = () => {
       const w = slides[0].clientWidth;
       track.style.transform = `translateX(-${idx * w}px)`;
     };
-    nextBtn.addEventListener('click', () => { idx = (idx+1)%slides.length; updateGallery(); });
-    prevBtn.addEventListener('click', () => { idx = (idx-1+slides.length)%slides.length; updateGallery(); });
-    window.addEventListener('resize', updateGallery);
+    nextBtn.addEventListener("click", () => {
+      idx = (idx + 1) % slides.length;
+      updateGallery();
+    });
+    prevBtn.addEventListener("click", () => {
+      idx = (idx - 1 + slides.length) % slides.length;
+      updateGallery();
+    });
+    window.addEventListener("resize", updateGallery);
     updateGallery();
 
-    // touch
+    // touch support
     let startX = 0;
-    track.addEventListener('touchstart', e => startX = e.touches[0].clientX);
-    track.addEventListener('touchend', e => {
+    track.addEventListener("touchstart", (e) => (startX = e.touches[0].clientX));
+    track.addEventListener("touchend", (e) => {
       const endX = e.changedTouches[0].clientX;
       if (endX < startX - 30) nextBtn.click();
       if (endX > startX + 30) prevBtn.click();
@@ -44,23 +56,55 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   // === HEADER LOGO ===
-  const header = document.querySelector('.menu-header');
+  const header = document.querySelector(".menu-header");
   let lastY = 0;
-  window.addEventListener('scroll', () => {
+  window.addEventListener("scroll", () => {
     const y = window.pageYOffset;
     if (y > lastY && y > header.offsetHeight) {
-      // scrolling down past header height → hide
-      header.style.transform = 'translateY(-100%)';
+      header.style.transform = "translateY(-100%)";
     } else {
-      // scrolling up or near top → show
-      header.style.transform = 'translateY(0)';
+      header.style.transform = "translateY(0)";
     }
     lastY = y;
   });
+
+  // === DROPDOWN SECTIONS (Our Walking Tips / Favorite Spots) ===
+  const buttons = document.querySelectorAll(".toggle-btn");
+
+  buttons.forEach((btn, index) => {
+    const content = document.getElementById(`content${index + 1}`);
+    const arrow = btn.querySelector("img");
+
+    btn.addEventListener("click", () => {
+      const isVisible = content.style.display === "block";
+
+      // Chiudi tutte le altre sezioni
+      document
+        .querySelectorAll(".toggle-content")
+        .forEach((div) => (div.style.display = "none"));
+      document.querySelectorAll(".toggle-btn img").forEach((img) => {
+        img.classList.remove("arrow-up");
+        img.classList.add("arrow-down");
+      });
+
+      // Mostra o nascondi la sezione selezionata
+      content.style.display = isVisible ? "none" : "block";
+
+      // Ruota la freccia
+      if (!isVisible) {
+        arrow.classList.remove("arrow-down");
+        arrow.classList.add("arrow-up");
+
+        // 🔥 Se è la sezione della mappa, forza l’aggiornamento Leaflet
+        if (content.id === "content2" && typeof map !== "undefined") {
+          setTimeout(() => {
+            map.invalidateSize();
+          }, 250);
+        }
+      }
+    });
+  });
 });
-
-/*MAPPA*/
-
 
 /* =========================================
    Velona’s Jungle Tips — Interactive Map
@@ -78,10 +122,10 @@ async function initMap() {
   map = L.map("map").setView([43.7769, 11.2387], 14);
 
   // Base layer
-L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {
-  attribution: '&copy; <a href="https://carto.com/">CARTO</a>',
-  maxZoom: 19,
-}).addTo(map);
+  L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {
+    attribution: '&copy; <a href="https://carto.com/">CARTO</a>',
+    maxZoom: 19,
+  }).addTo(map);
 
   // Index of layers
   const indexUrl = "https://acapobia23.github.io/map-tips/index.json";
@@ -89,7 +133,9 @@ L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {
   const indexData = await res.json();
 
   // === Base point: Velona’s Jungle ===
-  const baseRes = await fetch("https://acapobia23.github.io/map-tips/data/velona's-jungle.geojson");
+  const baseRes = await fetch(
+    "https://acapobia23.github.io/map-tips/data/velona's-jungle.geojson"
+  );
   const baseData = await baseRes.json();
   basePoint = L.geoJSON(baseData, {
     pointToLayer: (feature, latlng) =>
@@ -122,16 +168,20 @@ L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {
         if (props.description?.value) desc = props.description.value;
         else if (props.description) desc = props.description;
 
-      marker.bindPopup(`
-        <strong>${props.name || "Unnamed Place"}</strong>
-        <p>${desc || "Discover this hidden gem in Florence!"}</p>
-        <a href="https://www.google.com/maps/dir/?api=1&origin=Velona's Jungle, Florence&destination=${encodeURIComponent(props.name || 'Florence')}" target="_blank">
-          ➤ Open in Google Maps
-        </a>
-      `, { autoPanPadding: [40, 40] });
+        marker.bindPopup(
+          `
+          <strong>${props.name || "Unnamed Place"}</strong>
+          <p>${desc || "Discover this hidden gem in Florence!"}</p>
+          <a href="https://www.google.com/maps/dir/?api=1&origin=Velona's Jungle, Florence&destination=${encodeURIComponent(
+            props.name || "Florence"
+          )}" target="_blank">
+            ➤ Open in Google Maps
+          </a>
+        `,
+          { autoPanPadding: [40, 40] }
+        );
 
         marker.on("click", () => showRoute(latlng));
-
         return marker;
       },
     });
@@ -143,6 +193,7 @@ L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {
   setupFilters();
 }
 
+/* === FILTER BUTTONS === */
 function setupFilters() {
   const buttons = document.querySelectorAll(".map-controls .bott-grid-item");
 
@@ -150,11 +201,15 @@ function setupFilters() {
     let touchTimeout;
 
     // 👉 Gestione touch diretta
-    btn.addEventListener("touchstart", (e) => {
-      e.preventDefault();
-      clearTimeout(touchTimeout);
-      touchTimeout = setTimeout(() => handleClick(e, btn), 0);
-    }, { passive: false });
+    btn.addEventListener(
+      "touchstart",
+      (e) => {
+        e.preventDefault();
+        clearTimeout(touchTimeout);
+        touchTimeout = setTimeout(() => handleClick(e, btn), 0);
+      },
+      { passive: false }
+    );
 
     // 👉 Gestione click per desktop
     btn.addEventListener("click", (e) => handleClick(e, btn));
@@ -181,7 +236,6 @@ function setupFilters() {
     document.activeElement?.blur();
   }
 }
-
 
 /* === SHOW ROUTE === */
 function showRoute(latlng) {
@@ -220,3 +274,6 @@ function getIconByCategory(category) {
       return base + "base.png";
   }
 }
+
+
+
