@@ -146,42 +146,41 @@ function setupFilters() {
   const buttons = document.querySelectorAll(".map-controls .bott-grid-item");
 
   buttons.forEach((btn) => {
-    let isTouch = false; // rileva se l’input è touch
+    let touchTimeout;
 
-    // 🔹 Su dispositivi touch, impostiamo il flag
-    btn.addEventListener("touchstart", () => {
-      isTouch = true;
-    }, { passive: true });
-
-    // 🔹 Un solo listener, ma con logica separata
-    btn.addEventListener("click", (e) => {
+    // 👉 Gestione touch diretta
+    btn.addEventListener("touchstart", (e) => {
       e.preventDefault();
+      clearTimeout(touchTimeout);
+      touchTimeout = setTimeout(() => handleClick(e, btn), 0);
+    }, { passive: false });
 
-      const button = e.currentTarget;
-      const layerName = button.dataset.layer;
-      const layer = layers[layerName];
-      if (!layer) return;
-
-      const isOnMap = map.hasLayer(layer);
-
-      if (isOnMap) {
-        map.removeLayer(layer);
-        button.classList.remove("active");
-      } else {
-        map.addLayer(layer);
-        button.classList.add("active");
-      }
-
-      // 🔧 Rimuove focus solo se è un dispositivo touch reale
-      if (isTouch) {
-        setTimeout(() => {
-          button.blur();
-          button.classList.remove("focus");
-        }, 80);
-      }
-    });
+    // 👉 Gestione click per desktop
+    btn.addEventListener("click", (e) => handleClick(e, btn));
   });
+
+  function handleClick(e, button) {
+    e.preventDefault();
+    const layerName = button.dataset.layer;
+    const layer = layers[layerName];
+    if (!layer) return;
+
+    const isOnMap = map.hasLayer(layer);
+
+    if (isOnMap) {
+      map.removeLayer(layer);
+      button.classList.remove("active");
+    } else {
+      map.addLayer(layer);
+      button.classList.add("active");
+    }
+
+    // 💡 forza rimozione focus anche su iPhone
+    button.blur();
+    document.activeElement?.blur();
+  }
 }
+
 
 /* === SHOW ROUTE === */
 function showRoute(latlng) {

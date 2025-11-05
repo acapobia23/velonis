@@ -184,6 +184,22 @@
   user-select: none;
 }
 
+/* Fix touch focus lock su Safari e Android */
+.map-controls .bott-grid-item:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.map-controls .bott-grid-item:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.map-controls .bott-grid-item:focus:active {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
 
 
 
