@@ -78,10 +78,10 @@ async function initMap() {
   map = L.map("map").setView([43.7769, 11.2387], 14);
 
   // Base layer
-  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-    attribution: "&copy; OpenStreetMap contributors",
-    maxZoom: 19,
-  }).addTo(map);
+L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {
+  attribution: '&copy; <a href="https://carto.com/">CARTO</a>',
+  maxZoom: 19,
+}).addTo(map);
 
   // Index of layers
   const indexUrl = "https://acapobia23.github.io/map-tips/index.json";

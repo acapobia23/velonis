@@ -2,15 +2,17 @@
    MAP SECTION — Mobile First
    ========================================= */
 
-/* === MAP CONTAINER === */
+/* === MAP CONTAINER — Jungle Light Map Style === */
 #map {
   width: 100%;
   height: 60vh;
   border-radius: 16px;
-  border: 2px solid #3BD2C9;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  border: 1.5px solid rgba(59, 210, 201, 0.6); /* 🔹 più sottile e morbido */
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.07); /* 🔹 leggero rilievo */
   margin: 20px auto;
   overflow: hidden;
+  filter: brightness(0.98) saturate(1.05); /* 🔹 Jungle Light effect */
+  background-color: #f8f9fa; /* fallback se la mappa non carica */
 }
 
 /* === MAP CONTROLS — 4 BUTTONS ALWAYS VISIBLE === */
@@ -110,6 +112,7 @@
 @media (min-width: 600px) {
   #map {
     height: 65vh;
+    filter: brightness(0.98) saturate(1.05); /* mantenuto anche su tablet */
   }
 
   .map-controls {
@@ -133,9 +136,10 @@
   #map {
     height: 70vh;
     border-radius: 20px;
-    border: 2px solid #3BD2C9;
+    border: 1.5px solid rgba(59, 210, 201, 0.6);
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     margin: 30px auto;
+    filter: brightness(0.98) saturate(1.05); /* 🔹 Jungle Light effect */
   }
 
   .map-controls {
@@ -158,7 +162,7 @@
   }
 }
 
-/* Evita che clic su img/h2 blocchino il toggle del bottone */
+/* === ACCESSIBILITY & TOUCH OPTIMIZATION === */
 .map-controls .bott-grid-item * {
   pointer-events: none;
 }
@@ -172,11 +176,10 @@
   outline: none;
 }
 
-/* === MOBILE SAFARI & TOUCH OPTIMIZATION === */
-
-* { -webkit-tap-highlight-color: transparent; }
-.map-controls { user-select: none; }
-
+/* === MOBILE SAFARI & TOUCH FIX === */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
 
 .map-controls {
   -webkit-user-select: none;
@@ -184,21 +187,13 @@
   user-select: none;
 }
 
-/* Fix touch focus lock su Safari e Android */
-.map-controls .bott-grid-item:focus-visible {
-  outline: none !important;
-  box-shadow: none !important;
-}
-
-.map-controls .bott-grid-item:focus {
-  outline: none !important;
-  box-shadow: none !important;
-}
-
+.map-controls .bott-grid-item:focus-visible,
+.map-controls .bott-grid-item:focus,
 .map-controls .bott-grid-item:focus:active {
   outline: none !important;
   box-shadow: none !important;
 }
+
 
 
 
