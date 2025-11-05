@@ -147,29 +147,31 @@ async function initMap() {
       }).bindPopup("<strong>Velona’s Jungle</strong><br>Your starting point!"),
   }).addTo(map);
 
-  // === Load layers ===
-  for (const layerInfo of indexData.layers) {
-    const url = `https://acapobia23.github.io/map-tips/data/${layerInfo.file}`;
-    const res = await fetch(url);
-    const data = await res.json();
+// === Load layers ===
+for (const layerInfo of indexData.layers) {
+  const url = `https://acapobia23.github.io/map-tips/data/${layerInfo.file}`;
+  const res = await fetch(url);
+  const data = await res.json();
 
-    const geoLayer = L.geoJSON(data, {
-      pointToLayer: (feature, latlng) => {
-        const props = feature.properties || {};
-        const iconUrl = getIconByCategory(layerInfo.category);
-        const marker = L.marker(latlng, {
-          icon: L.icon({
-            iconUrl,
-            iconSize: [38, 38],
-          }),
-        });
+  const geoLayer = L.geoJSON(data, {
+    pointToLayer: (feature, latlng) => {
+      const props = feature.properties || {};
+      const iconUrl = getIconByCategory(layerInfo.category);
+      const marker = L.marker(latlng, {
+        icon: L.icon({
+          iconUrl,
+          iconSize: [38, 38],
+        }),
+      });
 
-        let desc = "";
-        if (props.description?.value) desc = props.description.value;
-        else if (props.description) desc = props.description;
+      let desc = "";
+      if (props.description?.value) desc = props.description.value;
+      else if (props.description) desc = props.description;
 
-        marker.bindPopup(
-          `
+      // === Popup ottimizzato e leggibile ===
+      marker.bindPopup(
+        `
+        <div class="popup-content">
           <strong>${props.name || "Unnamed Place"}</strong>
           <p>${desc || "Discover this hidden gem in Florence!"}</p>
           <a href="https://www.google.com/maps/dir/?api=1&origin=Velona's Jungle, Florence&destination=${encodeURIComponent(
@@ -177,17 +179,38 @@ async function initMap() {
           )}" target="_blank">
             ➤ Open in Google Maps
           </a>
+        </div>
         `,
-          { autoPanPadding: [40, 40] }
-        );
+        {
+          autoPan: true,
+          autoPanPadding: [50, 50],
+          maxWidth: 250,
+          className: "custom-popup",
+        }
+      );
 
-        marker.on("click", () => showRoute(latlng));
-        return marker;
-      },
-    });
+      // === Click handler migliorato ===
+      marker.on("click", () => {
+        // Centra la mappa dolcemente sul marker
+        map.flyTo(latlng, map.getZoom(), { animate: true, duration: 0.6 });
 
-    layers[layerInfo.category] = geoLayer;
-  }
+        // Dopo il flyTo, sposta leggermente la mappa verso l'alto
+        setTimeout(() => map.panBy([0, -80]), 600);
+
+        // Mostra la rotta dal punto base
+        showRoute(latlng);
+
+        // Apre il popup adattandolo allo schermo
+        marker.openPopup(latlng, { autoPan: true, autoPanPadding: [50, 50] });
+      });
+
+      return marker;
+    },
+  });
+
+  layers[layerInfo.category] = geoLayer;
+}
+
 
   // === Activate button logic ===
   setupFilters();
