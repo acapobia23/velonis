@@ -166,11 +166,17 @@ function setupFilters() {
         button.classList.add("active");
       }
 
-      // 🔧 su mobile forza la perdita del focus dopo 100ms
+      // 🔧 forza rimozione di focus e pseudo-stati anche su mobile
+      button.blur();
+      button.classList.remove("focus");
+      button.classList.remove(":focus");
+
+      // (opzionale, sicurezza extra per iOS)
       setTimeout(() => button.blur(), 100);
     });
   });
 }
+
 
 
 /* === SHOW ROUTE === */

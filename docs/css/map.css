@@ -64,6 +64,10 @@
   transform: translateY(-1px);
 }
 
+.map-controls .bott-grid-item.active {
+  border-width: 1px; /* 🔹 più sottile quando attivo */
+}
+
 /* keep icons visible even when active */
 .map-controls .bott-grid-item.active img,
 .map-controls .bott-grid-item:hover img {
@@ -158,6 +162,16 @@
 .map-controls .bott-grid-item * {
   pointer-events: none;
 }
+
+.map-controls .bott-grid-item:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.map-controls .bott-grid-item:active {
+  outline: none;
+}
+
 
 
 
