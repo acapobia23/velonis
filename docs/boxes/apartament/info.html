@@ -1,58 +1,136 @@
 <!DOCTYPE html>
-<html lang="it">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Info Apartament - Where Do Locals</title> <!-- scrivere nome experience -->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Velona's Jungle Tips - Where Do Locals</title>
 
-  <link rel="stylesheet" href="../../css/form.css">
-  <link rel="stylesheet" href="../../css/main.css">
+    <!-- === STYLES === -->
+    <link rel="stylesheet" href="../../css/form.css" />
+    <link rel="stylesheet" href="../../css/map.css" />
 
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300&display=swap" rel="stylesheet">
+    <!-- === FONT === -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300&display=swap"
+      rel="stylesheet"
+    />
 
-  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/pikaday/css/pikaday.css">
-  <script src="https://cdn.jsdelivr.net/npm/pikaday/pikaday.js"></script>
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-322753XBTW"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+    <!-- === LEAFLET MAPS === -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
-    gtag('config', 'G-322753XBTW');
-  </script>
-<link rel="icon" href="../../assets/img/headers/cupola-logo.png" type="image/png">
-</head>
+    <!-- === LEAFLET ROUTING MACHINE === -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css"
+    />
+    <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
 
-<body data-form-type="info-apartament"> <!-- mettere tag pagina-->
+    <!-- === GOOGLE ANALYTICS === -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-322753XBTW"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-322753XBTW");
+    </script>
 
-  <header class="menu-header">
-    <a href="../../index.html">
-      <img src="../../assets/img/original/logo-wdl.png" alt="Where Do Locals logo">
-    </a>
-  </header>
+    <!-- === FAVICON === -->
+    <link
+      rel="icon"
+      href="../../assets/img/headers/cupola-logo.png"
+      type="image/png"
+    />
+  </head>
 
-  <div class="container">
-    <br><br><br>
+  <body data-form-type="velonas-jungle-tips">
+    <header class="menu-header">
+      <a href="../../index.html">
+        <img
+          src="../../assets/img/original/logo-wdl.png"
+          alt="Where Do Locals logo"
+        />
+      </a>
+    </header>
 
-    <h2 class="section-title">Info Apartament</h2> <!-- titolo experience -->
-
+    <div class="container">
+      <br /><br /><br />
+      <h2 class="section-title">Velona's Jungle Tips</h2>
     <div id="gallery-container"></div>
+      <!-- CONTROLLI MAPPA -->
+      <div class="map-controls">
+        <div class="bott-grid-item text-center py-2" data-layer="breakfast">
+          <h2>
+            <img
+              src="../../assets/img/icons/breakfast.png"
+              height="40px"
+              alt="Breakfast"
+            />
+            Breakfast
+          </h2>
+        </div>
 
-    <section class="description">
+        <div class="bott-grid-item text-center py-2" data-layer="boutique">
+          <h2>
+            <img
+              src="../../assets/img/icons/boutique.png"
+              height="40px"
+              alt="Boutique"
+            />
+            Boutique
+          </h2>
+        </div>
 
+        <div class="bott-grid-item text-center py-2" data-layer="restaurant-bar">
+          <h2>
+            <img
+              src="../../assets/img/icons/restaurant.png"
+              height="40px"
+              alt="Restaurant"
+            />
+            Restaurants
+          </h2>
+        </div>
 
-<iframe src="https://www.google.com/maps/d/u/0/embed?mid=1mNVauGKmK0CwocD9PAX_kAc6rStt8QU&ehbc=2E312F&noprof=1" width="340" height="480"></iframe>
+        <div class="bott-grid-item text-center py-2" data-layer="veggie">
+          <h2>
+            <img
+              src="../../assets/img/icons/veggie.png"
+              height="40px"
+              alt="Veggie"
+            />
+            Veggie
+          </h2>
+        </div>
+      </div>
 
-    </section>
+      <!-- MAPPA -->
+      <div id="map"></div>
 
-    <div class="icon-links">
-      <a href="../../index.html"><img src="../../assets/img/icons/back-arrow.png" alt="back" /></a> <!-- aggiungere back page-->
+      <!-- DESCRIZIONE -->
+      <section class="description">
+        <h3>Our Walking Tips</h3>
+        <p>
+          Explore Florence like a local. From cozy cafés to hidden boutiques,
+          discover every corner starting right from Velona’s Jungle.
+        </p>
+      </section>
+
+      <!-- BACK BUTTON -->
+      <div class="icon-links">
+        <a href="../../index.html">
+          <img src="../../assets/img/icons/back-arrow.png" alt="back" />
+        </a>
+      </div>
     </div>
-  </div>
-</body>
+
+    <!-- SCRIPT MAPPA -->
+    <script src="../../js/velonas-jungle/info.js"></script>
+  </body>
 </html>
 
-<script src="../../js/velonas-jungle/info.js"></script> <!-- aggiungere js experience-->
