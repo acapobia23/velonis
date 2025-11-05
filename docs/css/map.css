@@ -194,6 +194,85 @@
   box-shadow: none !important;
 }
 
+/* =========================================
+   POPUP STYLING — Responsive Velona's Jungle Tips
+   ========================================= */
+.leaflet-popup-content-wrapper {
+  border-radius: 12px;
+  border: 1.5px solid rgba(59, 210, 201, 0.6);
+  background: #ffffff;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+  width: auto;
+  max-width: min(85vw, 300px); /* 🔹 dinamico: max 85% viewport o 300px */
+  text-align: center;
+  padding: 8px 0;
+  overflow-wrap: break-word; /* 🔹 evita testo che esce */
+}
+
+.leaflet-popup-content {
+  margin: 10px 14px;
+  font-family: "Poppins", sans-serif;
+  font-size: 13px;
+  color: #333;
+  line-height: 1.45em;
+}
+
+.leaflet-popup-content strong {
+  display: block;
+  color: #3BD2C9;
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.leaflet-popup-content p {
+  font-size: 12.5px;
+  color: #555;
+  margin-bottom: 12px;
+  line-height: 1.4em;
+}
+
+.leaflet-popup-content a {
+  display: inline-block;
+  background-color: #3BD2C9;
+  color: #fff !important;
+  font-size: 12px;
+  font-weight: 500;
+  text-decoration: none;
+  padding: 6px 12px;
+  border-radius: 8px;
+  transition: background-color 0.25s ease;
+}
+
+.leaflet-popup-content a:hover {
+  background-color: #33c0b7;
+}
+
+.leaflet-popup-tip {
+  background: #ffffff;
+}
+
+/* === MOBILE OPTIMIZATION === */
+@media (max-width: 600px) {
+  .leaflet-popup-content-wrapper {
+    max-width: 90vw; /* 🔹 quasi tutta la larghezza su mobile */
+    border-width: 1px;
+  }
+
+  .leaflet-popup-content strong {
+    font-size: 14px;
+  }
+
+  .leaflet-popup-content p {
+    font-size: 12px;
+  }
+
+  .leaflet-popup-content a {
+    font-size: 12px;
+    padding: 6px 10px;
+  }
+}
+
 
 
 

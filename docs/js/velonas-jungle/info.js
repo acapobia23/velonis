@@ -122,12 +122,13 @@ L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png", {
         if (props.description?.value) desc = props.description.value;
         else if (props.description) desc = props.description;
 
-        marker.bindPopup(
-          `<strong>${props.name || "Unnamed"}</strong><br>${desc}<br><br>
-          <a href="https://www.google.com/maps/dir/?api=1&origin=Velona's Jungle, Florence&destination=${latlng.lat},${latlng.lng}" target="_blank">
-            Open in Google Maps
-          </a>`
-        );
+      marker.bindPopup(`
+        <strong>${props.name || "Unnamed Place"}</strong>
+        <p>${desc || "Discover this hidden gem in Florence!"}</p>
+        <a href="https://www.google.com/maps/dir/?api=1&origin=Velona's Jungle, Florence&destination=${encodeURIComponent(props.name || 'Florence')}" target="_blank">
+          ➤ Open in Google Maps
+        </a>
+      `, { autoPanPadding: [40, 40] });
 
         marker.on("click", () => showRoute(latlng));
 
