@@ -172,6 +172,18 @@
   outline: none;
 }
 
+/* === MOBILE SAFARI & TOUCH OPTIMIZATION === */
+
+* { -webkit-tap-highlight-color: transparent; }
+.map-controls { user-select: none; }
+
+
+.map-controls {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+
 
 
 
