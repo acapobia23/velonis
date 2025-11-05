@@ -142,14 +142,16 @@ async function initMap() {
   setupFilters();
 }
 
-/* === BUTTON LOGIC (rock-solid toggle) === */
 function setupFilters() {
-  document.querySelectorAll(".map-controls .bott-grid-item").forEach((btn) => {
-    btn.addEventListener("click", (e) => {
-      // Sicurezza: risali sempre al contenitore del bottone
-      const button = e.target.closest(".bott-grid-item");
-      if (!button) return;
+  const buttons = document.querySelectorAll(".map-controls .bott-grid-item");
 
+  buttons.forEach((btn) => {
+    // 🔹 su mobile, rimuove il focus prima del click
+    btn.addEventListener("touchstart", () => btn.blur(), { passive: true });
+
+    btn.addEventListener("click", (e) => {
+      e.preventDefault();
+      const button = e.currentTarget;
       const layerName = button.dataset.layer;
       const layer = layers[layerName];
       if (!layer) return;
@@ -160,13 +162,15 @@ function setupFilters() {
         map.removeLayer(layer);
         button.classList.remove("active");
       } else {
-        layer.addTo(map);
+        map.addLayer(layer);
         button.classList.add("active");
       }
+
+      // 🔧 su mobile forza la perdita del focus dopo 100ms
+      setTimeout(() => button.blur(), 100);
     });
   });
 }
-
 
 
 /* === SHOW ROUTE === */
