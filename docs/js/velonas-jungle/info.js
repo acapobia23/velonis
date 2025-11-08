@@ -203,6 +203,13 @@ for (const layerInfo of indexData.layers) {
         // Apre il popup adattandolo allo schermo
         marker.openPopup(latlng, { autoPan: true, autoPanPadding: [50, 50] });
       });
+// 🔹 Quando chiudi il popup, rimuovi la linea di percorso
+marker.on("popupclose", () => {
+  if (routingControl) {
+    map.removeControl(routingControl);
+    routingControl = null;
+  }
+});
 
       return marker;
     },
@@ -278,7 +285,14 @@ function showRoute(latlng) {
     draggableWaypoints: false,
     fitSelectedRoutes: true,
     createMarker: () => null,
+    lineOptions: {
+      styles: [
+        { color: "#3BD2C9", weight: 5, opacity: 0.8 }, // linea principale acqua
+        { color: "#ffffff", weight: 2, opacity: 0.9 }, // bordo bianco interno
+      ],
+    },
   }).addTo(map);
+
 }
 
 /* === ICONS BY CATEGORY === */
