@@ -169,25 +169,32 @@ for (const layerInfo of indexData.layers) {
       else if (props.description) desc = props.description;
 
       // === Popup ottimizzato e leggibile ===
-      marker.bindPopup(
-        `
-        <div class="popup-content">
-          <strong>${props.name || "Unnamed Place"}</strong>
-          <p>${desc || "Discover this hidden gem in Florence!"}</p>
-          <a href="https://www.google.com/maps/dir/?api=1&origin=Velona's Jungle, Florence&destination=${encodeURIComponent(
-            props.name || "Florence"
-          )}" target="_blank">
-            ➤ Open in Google Maps
-          </a>
-        </div>
-        `,
-        {
-          autoPan: true,
-          autoPanPadding: [50, 50],
-          maxWidth: 250,
-          className: "custom-popup",
-        }
-      );
+// === Popup elegante personalizzato ===
+marker.bindPopup(
+  `
+  <div class="popup-card">
+    <div class="popup-header">
+      <img src="${iconUrl}" alt="${layerInfo.category}" class="popup-icon" />
+      <h3>${props.name || "Unnamed Place"}</h3>
+    </div>
+    <p class="popup-desc">
+      ${desc || "Discover this hidden gem in Florence!"}
+    </p>
+    <a class="popup-btn" href="https://www.google.com/maps/dir/?api=1&origin=Velona's Jungle, Florence&destination=${encodeURIComponent(
+      props.name || "Florence"
+    )}" target="_blank" rel="noopener">
+      Open in Google Maps
+    </a>
+  </div>
+  `,
+  {
+    autoPan: true,
+    autoPanPadding: [50, 50],
+    maxWidth: 280,
+    className: "elegant-popup",
+  }
+);
+
 
       // === Click handler migliorato ===
       marker.on("click", () => {

@@ -302,6 +302,73 @@
 }
 
 
+/* === Elegant Popup Style === */
+.leaflet-popup-content-wrapper.elegant-popup {
+  border: none;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+  background: linear-gradient(180deg, #ffffff 0%, #f9fdfd 100%);
+  animation: popupFade 0.35s ease;
+}
+
+.popup-card {
+  font-family: "Poppins", sans-serif;
+  text-align: center;
+  padding: 14px 18px 16px;
+  color: #444;
+}
+
+.popup-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.popup-icon {
+  width: 28px;
+  height: 28px;
+}
+
+.popup-card h3 {
+  font-size: 15px;
+  color: #3BD2C9;
+  margin: 0;
+  font-weight: 600;
+}
+
+.popup-desc {
+  font-size: 13px;
+  color: #555;
+  line-height: 1.4em;
+  margin: 8px 0 14px;
+}
+
+.popup-btn {
+  display: inline-block;
+  background: #3BD2C9;
+  color: #fff;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 6px 14px;
+  border-radius: 20px;
+  transition: all 0.25s ease;
+}
+
+.popup-btn:hover {
+  background: #2fb7af;
+  transform: scale(1.03);
+}
+
+@keyframes popupFade {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+
 
 
 
