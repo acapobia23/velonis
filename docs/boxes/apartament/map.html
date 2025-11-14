@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Velona's Jungle Map - Where Do Locals</title>
+
+  <!-- === STYLES === -->
+  <link rel="stylesheet" href="../../css/form.css" />
+  <link rel="stylesheet" href="../../css/map.css" />
+
+  <!-- === FONT === -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500&display=swap" rel="stylesheet" />
+
+  <!-- === LEAFLET === -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+  <!-- === ROUTING MACHINE === -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.css"/>
+  <script src="https://unpkg.com/leaflet-routing-machine@latest/dist/leaflet-routing-machine.js"></script>
+
+  <!-- === FAVICON === -->
+  <link rel="icon" href="../../assets/img/headers/cupola-logo.png" type="image/png" />
+
+</head>
+
+<body data-form-type="velonas-jungle-tips">
+  
+  <!-- ===================== -->
+  <!--   TOP LOGO CUPOLA     -->
+  <!-- ===================== -->
+  <div id="map-top-logo">
+    <img src="../../assets/img/headers/cupola-logo.png" alt="Cupola logo">
+  </div>
+
+  <!-- ===================== -->
+  <!--       HEADER          -->
+  <!-- ===================== -->
+  <header class="menu-header">
+    <a href="../../index.html">
+      <img src="../../assets/img/original/logo-wdl.png" alt="Where Do Locals logo"/>
+    </a>
+  </header>
+
+  <!-- ===================== -->
+  <!--     FULL MAP          -->
+  <!-- ===================== -->
+  <div id="map"></div>
+
+  <!-- ============================= -->
+  <!--  FILTER BUTTONS (TOP FLOAT)   -->
+  <!-- ============================= -->
+  <div class="map-filters-scroll">
+    <div class="map-controls">
+
+      <button class="bott-grid-item map-filter-btn" data-layer="breakfast">
+        <img src="../../assets/img/icons/breakfast.png" height="26" alt="">
+        Breakfast
+      </button>
+
+      <button class="bott-grid-item map-filter-btn" data-layer="boutique">
+        <img src="../../assets/img/icons/boutique.png" height="26" alt="">
+        Boutique
+      </button>
+
+      <button class="bott-grid-item map-filter-btn" data-layer="restaurant-bar">
+        <img src="../../assets/img/icons/restaurant.png" height="26" alt="">
+        Restaurants
+      </button>
+
+      <button class="bott-grid-item map-filter-btn" data-layer="veggie">
+        <img src="../../assets/img/icons/veggie.png" height="26" alt="">
+        Veggie
+      </button>
+
+    </div>
+  </div>
+
+  <!-- ===================== -->
+  <!--    BOTTOM CARD        -->
+  <!-- ===================== -->
+  <div id="map-card"></div>
+
+  <!-- ===================== -->
+  <!--   BOTTOM NAV LINKS    -->
+  <!-- ===================== -->
+  <div class="icon-links">
+    <a href="../../index.html">
+      <img src="../../assets/img/icons/back-arrow.png" alt="back" />
+    </a>
+  </div>
+
+  <!-- ===================== -->
+  <!--      SCRIPTS          -->
+  <!-- ===================== -->
+  <script src="../../js/velonas-jungle/map.js"></script>
+
+</body>
+</html>
+

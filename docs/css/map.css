@@ -1,372 +1,151 @@
-/* =========================================
-   MAP SECTION — Mobile First
-   ========================================= */
+/* ============================================================
+ MAP UI / FINAL DESIGN
+ Includes:
+ - Floating controls
+ - Card Animation
+ - Dark Mode
+ - Bounce animation
+============================================================ */
 
-/* === MAP CONTAINER — Jungle Light Map Style === */
+:root {
+  --accent: #3bd2c9;
+  --bg: #ffffff;
+  --text: #191919;
+  --card: #ffffff;
+}
+
+body.dark-mode {
+  --bg: #111;
+  --text: #ffffff;
+  --card: #1c1c1c;
+}
+
+/* Map fullscreen */
 #map {
+  position: fixed;
+  inset: 0;
   width: 100%;
-  height: 60vh;
-  border-radius: 16px;
-  border: 1.5px solid rgba(59, 210, 201, 0.6); /* 🔹 più sottile e morbido */
-  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.07); /* 🔹 leggero rilievo */
-  margin: 20px auto;
-  overflow: hidden;
-  filter: brightness(0.98) saturate(1.05); /* 🔹 Jungle Light effect */
-  background-color: #f8f9fa; /* fallback se la mappa non carica */
+  height: 100%;
 }
 
-/* === MAP CONTROLS — 4 BUTTONS ALWAYS VISIBLE === */
-.map-controls {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 8px;
-  margin: 20px 0;
+/* Theme button */
+.theme-toggle {
+  position: fixed;
+  top: 14px;
+  right: 14px;
+  z-index: 2000;
+  background: var(--card);
+  color: var(--text);
+  border: 1px solid var(--accent);
+  font-size: 18px;
+  border-radius: 50%;
+  width: 42px;
+  height: 42px;
 }
 
-.map-controls .bott-grid-item {
-  background: #fff;
-  border: 2px solid #3BD2C9;
-  border-radius: 14px;
-  transition: all 0.3s ease;
-  cursor: pointer;
+/* Floating filter buttons */
+.map-filters-scroll {
+  position: fixed;
+  top: 80px;
+  left: 0;
+  width: 100%;
   padding: 10px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-}
-
-.map-controls .bott-grid-item h2 {
-  font-size: 15px;
-  color: #3BD2C9;
-  font-weight: 500;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-}
-
-/* === ICONS (color originals + hover scale) === */
-.map-controls .bott-grid-item img {
-  height: 30px;
-  width: auto;
-  display: inline-block;
-  vertical-align: middle;
-  filter: none; /* ✅ No color tint */
-  transition: transform 0.2s ease, filter 0.2s ease;
-}
-
-.map-controls .bott-grid-item:hover img {
-  transform: scale(1.1);
-}
-
-/* === BUTTON STATES === */
-.map-controls .bott-grid-item:hover,
-.map-controls .bott-grid-item.active {
-  background-color: #3BD2C9;
-  color: #fff;
-  box-shadow: 0 0 10px rgba(59, 210, 201, 0.4);
-  transform: translateY(-1px);
-}
-
-.map-controls .bott-grid-item.active {
-  border-width: 1px; /* 🔹 più sottile quando attivo */
-}
-
-/* keep icons visible even when active */
-.map-controls .bott-grid-item.active img,
-.map-controls .bott-grid-item:hover img {
-  filter: none;
-}
-
-/* === POPUPS === */
-.leaflet-popup-content-wrapper {
-  border-radius: 14px;
-  border: 2px solid #3BD2C9;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
-}
-
-.leaflet-popup-content strong {
-  color: #3BD2C9;
-  font-weight: 600;
-  font-size: 15px;
-}
-
-.leaflet-popup-content a {
-  color: #3BD2C9;
-  text-decoration: none;
-  font-weight: 500;
-}
-
-.leaflet-popup-content a:hover {
-  text-decoration: underline;
-}
-
-/* === LEAFLET DEFAULT CONTROLS === */
-.leaflet-control {
-  border-radius: 12px !important;
-  background-color: rgba(255, 255, 255, 0.9) !important;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-}
-
-/* =========================================
-   TABLET VIEW — min-width: 600px
-   ========================================= */
-@media (min-width: 600px) {
-  #map {
-    height: 65vh;
-    filter: brightness(0.98) saturate(1.05); /* mantenuto anche su tablet */
-  }
-
-  .map-controls {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-  }
-
-  .map-controls .bott-grid-item h2 {
-    font-size: 16px;
-  }
-
-  .map-controls .bott-grid-item img {
-    height: 34px;
-  }
-}
-
-/* =========================================
-   DESKTOP VIEW — min-width: 992px
-   ========================================= */
-@media (min-width: 992px) {
-  #map {
-    height: 70vh;
-    border-radius: 20px;
-    border: 1.5px solid rgba(59, 210, 201, 0.6);
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    margin: 30px auto;
-    filter: brightness(0.98) saturate(1.05); /* 🔹 Jungle Light effect */
-  }
-
-  .map-controls {
-    grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
-    margin: 30px 0;
-  }
-
-  .map-controls .bott-grid-item {
-    border-radius: 16px;
-    padding: 12px;
-  }
-
-  .map-controls .bott-grid-item h2 {
-    font-size: 18px;
-  }
-
-  .map-controls .bott-grid-item img {
-    height: 38px;
-  }
-}
-
-/* === ACCESSIBILITY & TOUCH OPTIMIZATION === */
-.map-controls .bott-grid-item * {
-  pointer-events: none;
-}
-
-.map-controls .bott-grid-item:focus {
-  outline: none;
-  box-shadow: none;
-}
-
-.map-controls .bott-grid-item:active {
-  outline: none;
-}
-
-/* === MOBILE SAFARI & TOUCH FIX === */
-* {
-  -webkit-tap-highlight-color: transparent;
+  overflow-x: auto;
+  z-index: 1200;
 }
 
 .map-controls {
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  user-select: none;
-}
-
-.map-controls .bott-grid-item:focus-visible,
-.map-controls .bott-grid-item:focus,
-.map-controls .bott-grid-item:focus:active {
-  outline: none !important;
-  box-shadow: none !important;
-}
-
-/* =========================================
-   POPUP STYLING — Responsive Velona's Jungle Tips
-   ========================================= */
-.leaflet-popup-content-wrapper {
-  border-radius: 12px;
-  border: 1.5px solid rgba(59, 210, 201, 0.6);
-  background: #ffffff;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
-  width: auto;
-  max-width: min(85vw, 300px); /* 🔹 dinamico: max 85% viewport o 300px */
-  text-align: center;
-  padding: 0 0;
-  overflow-wrap: break-word; /* 🔹 evita testo che esce */
-}
-
-.leaflet-popup-content {
-  margin: 10px 14px;
-  font-family: "Poppins", sans-serif;
-  font-size: 13px;
-  color: #333;
-  line-height: 1.45em;
-}
-
-.leaflet-popup-content strong {
-  display: block;
-  color: #3BD2C9;
-  font-size: 15px;
-  font-weight: 600;
-  margin-bottom: 8px;
-}
-
-.leaflet-popup-content p {
-  font-size: 12.5px;
-  color: #555;
-  margin-bottom: 12px;
-  line-height: 1.4em;
-}
-
-.leaflet-popup-content a {
-  display: inline-block;
-  background-color: #3BD2C9;
-  color: #fff !important;
-  font-size: 12px;
-  font-weight: 500;
-  text-decoration: none;
-  padding: 6px 12px;
-  border-radius: 8px;
-  transition: background-color 0.25s ease;
-}
-
-.leaflet-popup-content a:hover {
-  background-color: #33c0b7;
-}
-
-.leaflet-popup-tip {
-  background: #ffffff;
-}
-
-/* === MOBILE OPTIMIZATION === */
-@media (max-width: 600px) {
-  .leaflet-popup-content-wrapper {
-    max-width: 90vw; /* 🔹 quasi tutta la larghezza su mobile */
-    border-width: 1px;
-  }
-
-  .leaflet-popup-content strong {
-    font-size: 14px;
-  }
-
-  .leaflet-popup-content p {
-    font-size: 12px;
-  }
-
-  .leaflet-popup-content a {
-    font-size: 12px;
-    padding: 6px 10px;
-  }
-}
-
-/* Popup styling */
-.leaflet-popup-content-wrapper.custom-popup {
-  border: 2px solid #3BD2C9;
-  border-radius: 14px;
-  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
-  max-width: 250px;
-}
-
-.leaflet-popup-content {
-  font-size: 14px;
-  line-height: 1.5;
-  color: #333;
-}
-
-.leaflet-popup-content p {
-  margin: 6px 0 10px;
-}
-
-.leaflet-popup-content a {
-  color: #3BD2C9;
-  font-weight: 500;
-  text-decoration: none;
-}
-
-.leaflet-popup-content a:hover {
-  text-decoration: underline;
-}
-
-
-/* === Elegant Popup Style === */
-.leaflet-popup-content-wrapper.elegant-popup {
-  border: none;
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
-  background: linear-gradient(180deg, #ffffff 0%, #f9fdfd 100%);
-  animation: popupFade 0.35s ease;
-}
-
-.popup-card {
-  font-family: "Poppins", sans-serif;
-  text-align: center;
-  padding: 14px 18px 16px;
-  color: #444;
-}
-
-.popup-header {
   display: flex;
-  align-items: center;
-  justify-content: center;
   gap: 10px;
-  margin-bottom: 8px;
 }
 
-.popup-icon {
-  width: 28px;
-  height: 28px;
+.map-filter-btn {
+  white-space: nowrap;
+  background: var(--card);
+  color: var(--text);
+  border: 1px solid var(--accent);
+  border-radius: 100px;
+  padding: 8px 14px;
+  font-family: inherit;
+  display: flex;
+  gap: 6px;
+  align-items: center;
 }
 
-.popup-card h3 {
-  font-size: 15px;
-  color: #3BD2C9;
-  margin: 0;
-  font-weight: 600;
-}
-
-.popup-desc {
-  font-size: 13px;
-  color: #555;
-  line-height: 1.4em;
-  margin: 8px 0 14px;
-}
-
-.popup-btn {
-  display: inline-block;
-  background: #3BD2C9;
+.map-filter-btn.active {
+  background: var(--accent);
   color: #fff;
+}
+
+/* Bottom Card */
+#map-card {
+  position: fixed;
+  bottom: -300px;
+  left: 0;
+  width: 100%;
+  padding: 16px;
+  transition: 0.35s cubic-bezier(0.25, 1, 0.3, 1);
+  z-index: 1500;
+}
+
+#map-card.visible {
+  bottom: 0;
+}
+
+.map-card-inner {
+  background: var(--card);
+  color: var(--text);
+  border-radius: 18px 18px 0 0;
+  padding: 18px;
+}
+
+.map-card-header {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.map-card-icon {
+  width: 34px;
+  height: 34px;
+}
+
+.map-card-category {
+  opacity: 0.6;
+  font-size: 12px;
+}
+
+.map-card-title {
+  font-size: 18px;
+  margin: 2px 0;
+}
+
+.map-card-desc {
+  font-size: 14px;
+  margin: 10px 0 16px;
+}
+
+.map-card-btn {
+  background: var(--accent);
+  color: white;
+  padding: 10px 18px;
   text-decoration: none;
-  font-size: 13px;
-  font-weight: 500;
-  padding: 6px 14px;
-  border-radius: 20px;
-  transition: all 0.25s ease;
+  border-radius: 100px;
+  font-weight: 600;
+  display: inline-block;
 }
 
-.popup-btn:hover {
-  background: #2fb7af;
-  transform: scale(1.03);
+/* Marker bounce animation */
+.bounce {
+  animation: markerBounce 0.5s ease;
 }
 
-@keyframes popupFade {
-  from { opacity: 0; transform: scale(0.95); }
-  to { opacity: 1; transform: scale(1); }
+@keyframes markerBounce {
+  0% { transform: translateY(0); }
+  40% { transform: translateY(-12px); }
+  100% { transform: translateY(0); }
 }
+
 
 
 
