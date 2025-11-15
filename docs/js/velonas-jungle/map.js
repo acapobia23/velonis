@@ -1,22 +1,23 @@
-  // === HEADER LOGO ===
-  const header = document.querySelector(".menu-header");
-  let lastY = 0;
-  window.addEventListener("scroll", () => {
-    const y = window.pageYOffset;
-    if (y > lastY && y > header.offsetHeight) {
-      header.style.transform = "translateY(-100%)";
-    } else {
-      header.style.transform = "translateY(0)";
-    }
-    lastY = y;
-  });
+// === HEADER LOGO (hide on scroll, se mai servirà) ===
+const header = document.querySelector(".menu-header");
+let lastY = 0;
+window.addEventListener("scroll", () => {
+  const y = window.pageYOffset;
+  if (y > lastY && y > header.offsetHeight) {
+    header.style.transform = "translateY(-100%)";
+  } else {
+    header.style.transform = "translateY(0)";
+  }
+  lastY = y;
+});
 
 /* ============================================================
  Velona’s Jungle Interactive Map — FINAL VERSION
  Mode: Premium UX (Smooth zoom, Bounce Selection, Dark Mode)
 ============================================================ */
 
-let map, routingControl = null;
+let map,
+  routingControl = null;
 let activeRing = null;
 let lastSelectedMarker = null;
 let layers = {};
@@ -176,7 +177,7 @@ function showRing(latlng) {
   }).addTo(map);
 }
 
-/* ------------------ CARD UI ------------------ */
+/* ------------------ CARD UI (SCROLLABILE) ------------------ */
 function showCard(place) {
   card.innerHTML = `
     <div class="map-card-inner">
@@ -187,7 +188,11 @@ function showCard(place) {
           <h3 class="map-card-title">${place.name}</h3>
         </div>
       </div>
-      <p class="map-card-desc">${place.description}</p>
+
+      <div class="map-card-scroll">
+        <p class="map-card-desc">${place.description}</p>
+      </div>
+
       <a class="map-card-btn" target="_blank" href="https://www.google.com/maps/dir/?api=1&origin=Velona's Jungle,Florence&destination=${encodeURIComponent(
         place.name + ", Florence"
       )}">
@@ -197,6 +202,18 @@ function showCard(place) {
   `;
 
   card.classList.add("visible");
+
+  // Evita che lo scroll interno trascini la mappa
+  const scrollArea = card.querySelector(".map-card-scroll");
+  if (scrollArea) {
+    scrollArea.addEventListener(
+      "touchmove",
+      (e) => {
+        e.stopPropagation();
+      },
+      { passive: false }
+    );
+  }
 }
 
 /* ------------------ CLOSE ON TAP ------------------ */
@@ -277,20 +294,28 @@ function formatCategory(c) {
 
 /* ------------------ THEME MODE ------------------ */
 function initTheme() {
-  if (localStorage.getItem("theme") === "dark")
+  if (localStorage.getItem("theme") === "dark") {
     document.body.classList.add("dark-mode");
+  }
 }
 
 function applyThemeMode() {
+  // se la mappa non è ancora pronta, evita errori
+  if (!map || !map.tileLayers) return;
+
   const mode = document.body.classList.contains("dark-mode")
     ? "dark"
     : "light";
 
-  map.tileLayers.light.remove();
-  map.tileLayers.dark.remove();
+  // rimuovo entrambi i tile layer, poi aggiungo quello giusto
+  if (map.tileLayers.light) map.removeLayer(map.tileLayers.light);
+  if (map.tileLayers.dark) map.removeLayer(map.tileLayers.dark);
 
-  if (mode === "dark") map.tileLayers.dark.addTo(map);
-  else map.tileLayers.light.addTo(map);
+  if (mode === "dark") {
+    map.tileLayers.dark.addTo(map);
+  } else {
+    map.tileLayers.light.addTo(map);
+  }
 }
 
 themeToggle?.addEventListener("click", () => {
@@ -301,4 +326,6 @@ themeToggle?.addEventListener("click", () => {
   );
   applyThemeMode();
 });
+
+
 

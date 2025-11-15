@@ -5,6 +5,7 @@
  - Card Animation
  - Dark Mode
  - Bounce animation
+ - Scrollable popup content
 ============================================================ */
 
 :root {
@@ -41,6 +42,9 @@ body.dark-mode {
   border-radius: 50%;
   width: 42px;
   height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Floating filter buttons */
@@ -83,7 +87,7 @@ body.dark-mode {
   bottom: -300px;
   left: 0;
   width: 100%;
-  padding: 16px;
+  padding: 0;
   transition: 0.35s cubic-bezier(0.25, 1, 0.3, 1);
   z-index: 1500;
 }
@@ -96,7 +100,10 @@ body.dark-mode {
   background: var(--card);
   color: var(--text);
   border-radius: 18px 18px 0 0;
-  padding: 18px;
+  padding: 18px 18px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
 }
 
 .map-card-header {
@@ -120,9 +127,30 @@ body.dark-mode {
   margin: 2px 0;
 }
 
+/* Area scrollabile del testo */
+.map-card-scroll {
+  max-height: 50vh;              /* altezza massima del contenuto */
+  overflow-y: auto;
+  padding-right: 6px;
+  scrollbar-width: thin;         /* Firefox */
+  -webkit-overflow-scrolling: touch;
+}
+
 .map-card-desc {
   font-size: 14px;
-  margin: 10px 0 16px;
+  margin: 6px 0 12px;
+}
+
+/* scrollbar style (optional, premium) */
+.map-card-scroll::-webkit-scrollbar {
+  width: 6px;
+}
+.map-card-scroll::-webkit-scrollbar-thumb {
+  background: rgba(150, 150, 150, 0.6);
+  border-radius: 6px;
+}
+.map-card-scroll::-webkit-scrollbar-track {
+  background: transparent;
 }
 
 .map-card-btn {
@@ -133,6 +161,8 @@ body.dark-mode {
   border-radius: 100px;
   font-weight: 600;
   display: inline-block;
+  align-self: flex-start;
+  margin-top: 4px;
 }
 
 /* Marker bounce animation */
@@ -145,6 +175,7 @@ body.dark-mode {
   40% { transform: translateY(-12px); }
   100% { transform: translateY(0); }
 }
+
 
 
 
