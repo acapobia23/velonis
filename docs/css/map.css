@@ -50,7 +50,7 @@ body.dark-mode {
 /* Floating filter buttons */
 .map-filters-scroll {
   position: fixed;
-  top: 80px;
+  top: 90px;
   left: 0;
   width: 100%;
   padding: 10px;
@@ -67,6 +67,19 @@ body.dark-mode {
   -webkit-overflow-scrolling: touch;
 }
 
+/* --- Nasconde scrollbar su tutti i browser --- */
+
+/* Safari / Chrome / Edge */
+.map-filters-scroll::-webkit-scrollbar,
+.map-controls::-webkit-scrollbar {
+  display: none;
+}
+
+/* Firefox */
+.map-filters-scroll,
+.map-controls {
+  scrollbar-width: none;
+}
 
 .map-filter-btn {
   white-space: nowrap;
