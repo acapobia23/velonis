@@ -16,12 +16,12 @@ window.addEventListener("scroll", () => {
  Mode: Premium UX (Smooth zoom, Bounce Selection, Dark Mode)
 ============================================================ */
 
-let map,
-  routingControl = null;
+let map, routingControl = null;
 let activeRing = null;
 let lastSelectedMarker = null;
 let layers = {};
 let basePoint = null;
+let activeLayer = null; // <--- nuovo controllo
 let ignoreClose = false;
 
 // DOM references
@@ -36,13 +36,11 @@ initTheme();
 async function initMap() {
   map = L.map("map", { zoomControl: false }).setView([43.7769, 11.2387], 14);
 
-  // Light Mode Default Tile
   const lightTiles = L.tileLayer(
     "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
     { maxZoom: 19 }
   ).addTo(map);
 
-  // Dark Mode Tile (loaded only if needed)
   const darkTiles = L.tileLayer(
     "https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png",
     { maxZoom: 19 }
@@ -50,34 +48,25 @@ async function initMap() {
 
   map.tileLayers = { light: lightTiles, dark: darkTiles };
 
-  // Enable zoom buttons
   L.control.zoom({ position: "topright" }).addTo(map);
 
-  // Load GeoJSON index
   const res = await fetch("https://acapobia23.github.io/map-tips/index.json");
   const indexData = await res.json();
 
-  // Base point (Velona’s Jungle)
-  const baseRes = await fetch(
-    "https://acapobia23.github.io/map-tips/data/velona's-jungle.geojson"
-  );
+  const baseRes = await fetch("https://acapobia23.github.io/map-tips/data/velona's-jungle.geojson");
   const baseData = await baseRes.json();
 
   basePoint = L.geoJSON(baseData, {
     pointToLayer: (feature, latlng) =>
       L.marker(latlng, {
         icon: L.icon({
-          iconUrl:
-            "https://acapobia23.github.io/map-tips/asset/icons/base.png",
+          iconUrl: "https://acapobia23.github.io/map-tips/asset/icons/base.png",
           iconSize: [42, 42],
         }),
       }).bindPopup(`<strong>Velona’s Jungle</strong><br>Your starting point.`),
   }).addTo(map);
 
-  // Load all category layers (start hidden)
-  for (const layer of indexData.layers) {
-    await loadCategoryLayer(layer);
-  }
+  for (const layer of indexData.layers) await loadCategoryLayer(layer);
 
   setupFilters();
   setupMapCloseLogic();
@@ -86,8 +75,7 @@ async function initMap() {
 
 /* ------------------ LOAD CATEGORY ------------------ */
 async function loadCategoryLayer(layerInfo) {
-  const url = `https://acapobia23.github.io/map-tips/data/${layerInfo.file}`;
-  const res = await fetch(url);
+  const res = await fetch(`https://acapobia23.github.io/map-tips/data/${layerInfo.file}`);
   const data = await res.json();
 
   const geoLayer = L.geoJSON(data, {
@@ -107,7 +95,6 @@ async function loadCategoryLayer(layerInfo) {
       };
 
       marker.on("click", () => onMarkerSelect(marker));
-
       return marker;
     },
   });
@@ -115,53 +102,35 @@ async function loadCategoryLayer(layerInfo) {
   layers[layerInfo.category] = geoLayer;
 }
 
-/* ------------------ MARKER SELECT ------------------ */
+/* ------------------ SELECT MARKER ------------------ */
 function onMarkerSelect(marker) {
   ignoreClose = true;
   setTimeout(() => (ignoreClose = false), 250);
 
-  // Bounce Animation
   if (lastSelectedMarker) lastSelectedMarker._icon.classList.remove("bounce");
   marker._icon.classList.add("bounce");
   lastSelectedMarker = marker;
 
-  // Route
   showRoute(marker.place.latlng);
-
-  // Highlight ring
   showRing(marker.place.latlng);
 
-  // Fly smoothly
-  map.flyTo(marker.place.latlng, Math.max(map.getZoom(), 17), {
-    animate: true,
-    duration: 0.75,
-  });
+  map.flyTo(marker.place.latlng, Math.max(map.getZoom(), 17), { animate: true, duration: 0.75 });
 
-  // Show card
   showCard(marker.place);
 }
 
 /* ------------------ ROUTE ------------------ */
 function showRoute(latlng) {
   if (!basePoint) return;
-
   const basePos = basePoint.getLayers()[0].getLatLng();
-
   if (routingControl) map.removeControl(routingControl);
 
   routingControl = L.Routing.control({
     waypoints: [basePos, latlng],
-    router: L.Routing.osrmv1({
-      serviceUrl: "https://router.project-osrm.org/route/v1",
-      profile: "foot"
-    }),
+    router: L.Routing.osrmv1({ serviceUrl: "https://router.project-osrm.org/route/v1", profile: "foot" }),
     show: false,
     addWaypoints: false,
     draggableWaypoints: false,
-    optimizeWaypoints: true,
-    alternativeRoute: false,
-    fitSelectedRoutes: true,
-    routeWhileDragging: false,
     lineOptions: {
       styles: [
         { color: "#3BD2C9", weight: 5, opacity: 0.9 },
@@ -172,19 +141,13 @@ function showRoute(latlng) {
   }).addTo(map);
 }
 
-
-/* ------------------ RING HIGHLIGHT ------------------ */
+/* ------------------ RING ------------------ */
 function showRing(latlng) {
   if (activeRing) map.removeLayer(activeRing);
-
-  activeRing = L.circleMarker(latlng, {
-    radius: 26,
-    color: "#3BD2C9",
-    weight: 3,
-    fillOpacity: 0,
-  }).addTo(map);
+  activeRing = L.circleMarker(latlng, { radius: 26, color: "#3BD2C9", weight: 3, fillOpacity: 0 }).addTo(map);
 }
 
+/* ------------------ CARD ------------------ */
 function showCard(place) {
   card.innerHTML = `
     <div class="map-card-inner">
@@ -195,146 +158,165 @@ function showCard(place) {
           <h3 class="map-card-title">${place.name}</h3>
         </div>
       </div>
-
       <div class="map-card-scroll">
         <p class="map-card-desc">${place.description}</p>
       </div>
-
-      <!-- BUTTON WRAPPER -->
       <div class="map-card-btn-row">
         <a class="map-card-btn" target="_blank"
-          href="https://www.google.com/maps/dir/?api=1&origin=Velona's Jungle,Florence&destination=${encodeURIComponent(
-            place.name + ', Florence'
-          )}">
+          href="https://www.google.com/maps/dir/?api=1&origin=Velona's Jungle,Florence&destination=${encodeURIComponent(place.name + ', Florence')}">
           Open in Google Maps
         </a>
-
         <a class="map-card-btn secondary-btn" href="../../boxes/mobility/mobility.html">
           How to Get Around
         </a>
       </div>
     </div>
   `;
-
   card.classList.add("visible");
-
-  const scrollArea = card.querySelector(".map-card-scroll");
-  if (scrollArea) {
-    scrollArea.addEventListener("touchmove", (e) => e.stopPropagation(), { passive: false });
-  }
 }
 
-
-/* ------------------ CLOSE ON TAP ------------------ */
+/* ------------------ MAP CLICK TO CLOSE ------------------ */
 function setupMapCloseLogic() {
   map.on("click", () => {
-    if (ignoreClose) return;
-    hideCard();
+    if (!ignoreClose) hideCard();
   });
 }
 
 function hideCard() {
   card.classList.remove("visible");
-  if (routingControl) map.removeControl(routingControl);
-  if (activeRing) map.removeLayer(activeRing);
-  if (lastSelectedMarker)
-    lastSelectedMarker._icon.classList.remove("bounce");
+  if (routingControl) { map.removeControl(routingControl); routingControl = null; }
+  if (activeRing) { map.removeLayer(activeRing); activeRing = null; }
+  if (lastSelectedMarker) { lastSelectedMarker._icon.classList.remove("bounce"); lastSelectedMarker = null; }
 }
 
-/* ------------------ FILTERS ------------------ */
+/* ------------------ MARKER RESET (single active layer, stable) ------------------ */
+
+function resetSelectionState() {
+  // Rimuove routing
+  if (routingControl) {
+    map.removeControl(routingControl);
+    routingControl = null;
+  }
+
+  // Rimuove cerchio attivo
+  if (activeRing) {
+    map.removeLayer(activeRing);
+    activeRing = null;
+  }
+
+  // Rimuove animazione e resetta marker selezionato
+  if (lastSelectedMarker) {
+    if (lastSelectedMarker._icon) {
+      lastSelectedMarker._icon.classList.remove("bounce");
+    }
+    lastSelectedMarker = null;
+  }
+
+  // Nasconde card se aperta
+  card.classList.remove("visible");
+}
+
+/* ------------------ FILTERS (single active layer, stable) ------------------ */
 function setupFilters() {
   document.querySelectorAll(".map-filter-btn").forEach((btn) => {
     btn.addEventListener("click", () => {
-      const layerName = btn.dataset.layer;
-      const layer = layers[layerName];
 
-      if (map.hasLayer(layer)) {
+      const selected = btn.dataset.layer;
+      const layer = layers[selected];
+
+      // Caso: layer attivo → spegni e reset
+      if (activeLayer === selected) {
+
+        resetSelectionState();
+
         map.removeLayer(layer);
         btn.classList.remove("active");
-      } else {
-        map.addLayer(layer);
-        btn.classList.add("active");
+
+        activeLayer = null;
+
+        // Centro sul punto base
+        requestAnimationFrame(() => {
+          map.flyTo([43.7769, 11.2387], 14);
+        });
+
+        return;
       }
 
-      adjustView();
+      // Cambio layer → prima reset totale
+      if (activeLayer) {
+        resetSelectionState();
+
+        map.removeLayer(layers[activeLayer]);
+        document.querySelector(`[data-layer="${activeLayer}"]`)?.classList.remove("active");
+      }
+
+      // Attivo nuovo layer
+      map.addLayer(layer);
+      btn.classList.add("active");
+      activeLayer = selected;
+
+      // Centro dopo che i marker sono montati
+      setTimeout(() => adjustView(selected), 50);
     });
   });
 }
 
 /* ------------------ AUTO VIEW ------------------ */
-function adjustView() {
-  const activeLayers = Object.values(layers).filter((l) => map.hasLayer(l));
-  if (!activeLayers.length) {
-    map.flyTo([43.7769, 11.2387], 14);
-    return;
-  }
+function adjustView(layerName) {
+  const layer = layers[layerName];
+  if (!layer) return;
 
   const bounds = L.latLngBounds([]);
-  activeLayers.forEach((layer) => {
-    layer.eachLayer((m) => bounds.extend(m.getLatLng()));
-  });
 
-  map.flyToBounds(bounds, { padding: [50, 50], animate: true });
+  layer.eachLayer(marker => bounds.extend(marker.getLatLng()));
+
+  if (bounds.isValid()) {
+    map.flyToBounds(bounds, { padding: [60, 60], animate: true });
+  }
 }
 
 /* ------------------ ICONS ------------------ */
 function getIcon(type) {
   const base = "https://acapobia23.github.io/map-tips/asset/icons/";
-  return (
-    {
-      breakfast: base + "breakfast.png",
-      boutique: base + "boutique.png",
-      "restaurant-bar": base + "restaurant.png",
-      veggie: base + "veggie.png",
-    }[type] ?? base + "base.png"
-  );
+  return {
+    breakfast: base + "breakfast.png",
+    boutique: base + "boutique.png",
+    "restaurant-bar": base + "restaurant.png",
+    veggie: base + "veggie.png"
+  }[type] ?? base + "base.png";
 }
 
 function formatCategory(c) {
-  return (
-    {
-      breakfast: "Breakfast & Cafés",
-      boutique: "Boutiques",
-      "restaurant-bar": "Restaurants & Bars",
-      veggie: "Veggie Friendly",
-    }[c] ?? c
-  );
+  return {
+    breakfast: "Breakfast & Cafés",
+    boutique: "Boutiques",
+    "restaurant-bar": "Restaurants & Bars",
+    veggie: "Veggie Friendly",
+  }[c] ?? c;
 }
 
-/* ------------------ THEME MODE ------------------ */
+/* ------------------ THEME ------------------ */
 function initTheme() {
-  if (localStorage.getItem("theme") === "dark") {
-    document.body.classList.add("dark-mode");
-  }
+  if (localStorage.getItem("theme") === "dark") document.body.classList.add("dark-mode");
 }
 
 function applyThemeMode() {
-  // se la mappa non è ancora pronta, evita errori
   if (!map || !map.tileLayers) return;
 
-  const mode = document.body.classList.contains("dark-mode")
-    ? "dark"
-    : "light";
+  const mode = document.body.classList.contains("dark-mode") ? "dark" : "light";
 
-  // rimuovo entrambi i tile layer, poi aggiungo quello giusto
   if (map.tileLayers.light) map.removeLayer(map.tileLayers.light);
   if (map.tileLayers.dark) map.removeLayer(map.tileLayers.dark);
 
-  if (mode === "dark") {
-    map.tileLayers.dark.addTo(map);
-  } else {
-    map.tileLayers.light.addTo(map);
-  }
+  mode === "dark" ? map.tileLayers.dark.addTo(map) : map.tileLayers.light.addTo(map);
 }
 
 themeToggle?.addEventListener("click", () => {
   document.body.classList.toggle("dark-mode");
-  localStorage.setItem(
-    "theme",
-    document.body.classList.contains("dark-mode") ? "dark" : "light"
-  );
+  localStorage.setItem("theme", document.body.classList.contains("dark-mode") ? "dark" : "light");
   applyThemeMode();
 });
+
 
 
 
