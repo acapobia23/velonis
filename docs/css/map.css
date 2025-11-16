@@ -60,8 +60,13 @@ body.dark-mode {
 
 .map-controls {
   display: flex;
-  gap: 10px;
+  gap: 12px;
+  padding: 0 22px; /* Aumenta lo spazio a sinistra e destra */
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
 }
+
 
 .map-filter-btn {
   white-space: nowrap;
