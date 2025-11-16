@@ -50,7 +50,7 @@ body.dark-mode {
 /* Floating filter buttons */
 .map-filters-scroll {
   position: fixed;
-  top: 90px;
+  top: 80px;
   left: 0;
   width: 100%;
   padding: 10px;
@@ -215,14 +215,6 @@ body.dark-mode {
   color: white;
 }
 
-/* If screen is VERY small (<320px), auto resize text */
-@media (max-width: 330px) {
-  .map-card-btn-row .map-card-btn {
-    font-size: 12px;
-    padding: 10px 6px;
-  }
-}
-
 .fixed-ring {
   border: 3px solid #3BD2C9;
   border-radius: 50%;
@@ -231,6 +223,14 @@ body.dark-mode {
   box-sizing: border-box;
   pointer-events: none;
   transform: translate(-50%, -50%);
+}
+
+/* If screen is VERY small (<320px), auto resize text */
+@media (max-width: 330px) {
+  .map-card-btn-row .map-card-btn {
+    font-size: 12px;
+    padding: 10px 6px;
+  }
 }
 
 
