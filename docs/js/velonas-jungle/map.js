@@ -71,6 +71,8 @@ async function initMap() {
   setupFilters();
   setupMapCloseLogic();
   applyThemeMode();
+
+  setTimeout(playScrollHint, 1200);
 }
 
 /* ------------------ LOAD CATEGORY ------------------ */
@@ -143,9 +145,19 @@ function showRoute(latlng) {
 
 /* ------------------ RING ------------------ */
 function showRing(latlng) {
+  // Rimuovi quello precedente
   if (activeRing) map.removeLayer(activeRing);
-  activeRing = L.circleMarker(latlng, { radius: 26, color: "#3BD2C9", weight: 3, fillOpacity: 0 }).addTo(map);
+
+  // Nuovo marker stile fisso (non si deforma durante zoom)
+  activeRing = L.marker(latlng, {
+    icon: L.divIcon({
+      className: "fixed-ring",
+      iconSize: [54, 54], // dimensione fissa (puoi cambiarla)
+    }),
+    interactive: false // non cliccabile
+  }).addTo(map);
 }
+
 
 /* ------------------ CARD ------------------ */
 function showCard(place) {
@@ -259,6 +271,32 @@ function setupFilters() {
       setTimeout(() => adjustView(selected), 50);
     });
   });
+}
+
+function playScrollHint() {
+
+  // Esegui solo la prima volta
+  if (localStorage.getItem("scrollHintPlayed") === "yes") return;
+  localStorage.setItem("scrollHintPlayed", "yes");
+
+  const scrollBox = document.querySelector(".map-controls");
+  if (!scrollBox) return;
+
+  // Se non serve scrollare (pochi bottoni), evita animazione
+  if (scrollBox.scrollWidth <= scrollBox.clientWidth) return;
+
+  // Posizione iniziale
+  scrollBox.scrollTo({ left: 0 });
+
+  // Scorri verso destra
+  setTimeout(() => {
+    scrollBox.scrollTo({ left: scrollBox.scrollWidth, behavior: "smooth" });
+  }, 400);
+
+  // Torna indietro piano
+  setTimeout(() => {
+    scrollBox.scrollTo({ left: 0, behavior: "smooth" });
+  }, 1800);
 }
 
 /* ------------------ AUTO VIEW ------------------ */

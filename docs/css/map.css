@@ -54,17 +54,18 @@ body.dark-mode {
   left: 0;
   width: 100%;
   padding: 10px;
-  overflow-x: auto;
+  /* overflow-x: auto;  <-- TOGLI questa riga */
   z-index: 1200;
 }
 
 .map-controls {
   display: flex;
   gap: 12px;
-  padding: 0 22px; /* Aumenta lo spazio a sinistra e destra */
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
+  padding: 0 22px;
+  overflow-x: auto;          /* <- QUI lasciamo lo scroll */
   -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;   /* <- aggiungi per fluidità */
+  width: 100%;               /* <- assicura che possa scrollare */
 }
 
 /* --- Nasconde scrollbar su tutti i browser --- */
@@ -223,6 +224,15 @@ body.dark-mode {
   }
 }
 
+.fixed-ring {
+  border: 3px solid #3BD2C9;
+  border-radius: 50%;
+  width: 54px;
+  height: 54px;
+  box-sizing: border-box;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+}
 
 @keyframes markerBounce {
   0% { transform: translateY(0); }
