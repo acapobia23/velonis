@@ -50,7 +50,7 @@ body.dark-mode {
 /* Floating filter buttons */
 .map-filters-scroll {
   position: fixed;
-  top: 80px;
+  top: 90px;
   left: 0;
   width: 100%;
   padding: 10px;
