@@ -71,8 +71,6 @@ async function initMap() {
   setupFilters();
   setupMapCloseLogic();
   applyThemeMode();
-
-  setTimeout(playScrollHint, 1200);
 }
 
 /* ------------------ LOAD CATEGORY ------------------ */
@@ -157,7 +155,6 @@ function showRing(latlng) {
     interactive: false // non cliccabile
   }).addTo(map);
 }
-
 
 /* ------------------ CARD ------------------ */
 function showCard(place) {
@@ -271,32 +268,6 @@ function setupFilters() {
       setTimeout(() => adjustView(selected), 50);
     });
   });
-}
-
-function playScrollHint() {
-
-  // Esegui solo la prima volta
-  if (localStorage.getItem("scrollHintPlayed") === "yes") return;
-  localStorage.setItem("scrollHintPlayed", "yes");
-
-  const scrollBox = document.querySelector(".map-controls");
-  if (!scrollBox) return;
-
-  // Se non serve scrollare (pochi bottoni), evita animazione
-  if (scrollBox.scrollWidth <= scrollBox.clientWidth) return;
-
-  // Posizione iniziale
-  scrollBox.scrollTo({ left: 0 });
-
-  // Scorri verso destra
-  setTimeout(() => {
-    scrollBox.scrollTo({ left: scrollBox.scrollWidth, behavior: "smooth" });
-  }, 400);
-
-  // Torna indietro piano
-  setTimeout(() => {
-    scrollBox.scrollTo({ left: 0, behavior: "smooth" });
-  }, 1800);
 }
 
 /* ------------------ AUTO VIEW ------------------ */
