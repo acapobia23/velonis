@@ -175,6 +175,42 @@ body.dark-mode {
   animation: markerBounce 0.5s ease;
 }
 
+/* Force buttons to stay side-by-side */
+.map-card-btn-row {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+}
+
+/* Each button takes 50% width and stays aligned */
+.map-card-btn-row .map-card-btn {
+  flex: 1;
+  text-align: center;
+  padding: 12px 10px;
+  font-size: 14px;
+  white-space: nowrap; /* prevents line break */
+}
+
+/* Style second button */
+.secondary-btn {
+  background: transparent;
+  border: 2px solid var(--accent);
+  color: var(--accent);
+}
+.secondary-btn:hover {
+  background: var(--accent);
+  color: white;
+}
+
+/* If screen is VERY small (<320px), auto resize text */
+@media (max-width: 330px) {
+  .map-card-btn-row .map-card-btn {
+    font-size: 12px;
+    padding: 10px 6px;
+  }
+}
+
+
 @keyframes markerBounce {
   0% { transform: translateY(0); }
   40% { transform: translateY(-12px); }

@@ -151,19 +151,27 @@ function showRoute(latlng) {
 
   routingControl = L.Routing.control({
     waypoints: [basePos, latlng],
+    router: L.Routing.osrmv1({
+      serviceUrl: "https://router.project-osrm.org/route/v1",
+      profile: "foot"
+    }),
     show: false,
     addWaypoints: false,
     draggableWaypoints: false,
-    fitSelectedRoutes: false,
+    optimizeWaypoints: true,
+    alternativeRoute: false,
+    fitSelectedRoutes: true,
+    routeWhileDragging: false,
     lineOptions: {
       styles: [
         { color: "#3BD2C9", weight: 5, opacity: 0.9 },
-        { color: "#ffffff", weight: 2, opacity: 0.9 },
-      ],
+        { color: "#ffffff", weight: 2, opacity: 0.9 }
+      ]
     },
-    createMarker: () => null,
+    createMarker: () => null
   }).addTo(map);
 }
+
 
 /* ------------------ RING HIGHLIGHT ------------------ */
 function showRing(latlng) {
@@ -177,7 +185,6 @@ function showRing(latlng) {
   }).addTo(map);
 }
 
-/* ------------------ CARD UI (SCROLLABILE) ------------------ */
 function showCard(place) {
   card.innerHTML = `
     <div class="map-card-inner">
@@ -193,28 +200,30 @@ function showCard(place) {
         <p class="map-card-desc">${place.description}</p>
       </div>
 
-      <a class="map-card-btn" target="_blank" href="https://www.google.com/maps/dir/?api=1&origin=Velona's Jungle,Florence&destination=${encodeURIComponent(
-        place.name + ", Florence"
-      )}">
-        Open in Google Maps
-      </a>
+      <!-- BUTTON WRAPPER -->
+      <div class="map-card-btn-row">
+        <a class="map-card-btn" target="_blank"
+          href="https://www.google.com/maps/dir/?api=1&origin=Velona's Jungle,Florence&destination=${encodeURIComponent(
+            place.name + ', Florence'
+          )}">
+          Open in Google Maps
+        </a>
+
+        <a class="map-card-btn secondary-btn" href="../../boxes/mobility/mobility.html">
+          How to Get Around
+        </a>
+      </div>
     </div>
   `;
 
   card.classList.add("visible");
 
-  // Evita che lo scroll interno trascini la mappa
   const scrollArea = card.querySelector(".map-card-scroll");
   if (scrollArea) {
-    scrollArea.addEventListener(
-      "touchmove",
-      (e) => {
-        e.stopPropagation();
-      },
-      { passive: false }
-    );
+    scrollArea.addEventListener("touchmove", (e) => e.stopPropagation(), { passive: false });
   }
 }
+
 
 /* ------------------ CLOSE ON TAP ------------------ */
 function setupMapCloseLogic() {
