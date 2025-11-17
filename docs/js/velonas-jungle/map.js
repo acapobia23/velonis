@@ -30,6 +30,26 @@ const themeToggle = document.getElementById("theme-toggle");
 
 /* ------------------ INIT ------------------ */
 document.addEventListener("DOMContentLoaded", initMap);
+// 🔥 Abilita animazione SEMPRE, ad ogni refresh
+document.addEventListener("DOMContentLoaded", () => {
+  document.body.classList.add("filters-animate");
+
+  // === AUTO-CAROUSEL HINT (mobile only) ===
+  setTimeout(() => {
+    if (window.innerWidth > 768) return;
+
+    const scrollArea = document.querySelector(".map-controls");
+    if (!scrollArea) return;
+
+    scrollArea.scrollTo({ left: scrollArea.scrollWidth, behavior: "smooth" });
+
+    setTimeout(() => {
+      scrollArea.scrollTo({ left: 0, behavior: "smooth" });
+    }, 1200);
+
+  }, 800);
+});
+
 initTheme();
 
 /* ------------------ MAP INIT ------------------ */
